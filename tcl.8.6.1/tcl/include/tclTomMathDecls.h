@@ -166,15 +166,15 @@ EXTERN int		TclBN_mp_copy(const mp_int *a, mp_int *b);
 EXTERN int		TclBN_mp_count_bits(const mp_int *a);
 /* 13 */
 EXTERN int		TclBN_mp_div(mp_int *a, mp_int *b, mp_int *q,
-				mp_int *r);
+                             mp_int *r);
 /* 14 */
 EXTERN int		TclBN_mp_div_d(mp_int *a, mp_digit b, mp_int *q,
-				mp_digit *r);
+                               mp_digit *r);
 /* 15 */
 EXTERN int		TclBN_mp_div_2(mp_int *a, mp_int *q);
 /* 16 */
 EXTERN int		TclBN_mp_div_2d(const mp_int *a, int b, mp_int *q,
-				mp_int *r);
+                                mp_int *r);
 /* 17 */
 EXTERN int		TclBN_mp_div_3(mp_int *a, mp_int *q, mp_digit *r);
 /* 18 */
@@ -215,7 +215,7 @@ EXTERN int		TclBN_mp_or(mp_int *a, mp_int *b, mp_int *c);
 EXTERN int		TclBN_mp_radix_size(mp_int *a, int radix, int *size);
 /* 36 */
 EXTERN int		TclBN_mp_read_radix(mp_int *a, const char *str,
-				int radix);
+                                    int radix);
 /* 37 */
 EXTERN void		TclBN_mp_rshd(mp_int *a, int shift);
 /* 38 */
@@ -234,10 +234,10 @@ EXTERN int		TclBN_mp_sub_d(mp_int *a, mp_digit b, mp_int *c);
 EXTERN int		TclBN_mp_to_unsigned_bin(mp_int *a, unsigned char *b);
 /* 45 */
 EXTERN int		TclBN_mp_to_unsigned_bin_n(mp_int *a,
-				unsigned char *b, unsigned long *outlen);
+        unsigned char *b, unsigned long *outlen);
 /* 46 */
 EXTERN int		TclBN_mp_toradix_n(mp_int *a, char *str, int radix,
-				int maxlen);
+                                   int maxlen);
 /* 47 */
 EXTERN int		TclBN_mp_unsigned_bin_size(mp_int *a);
 /* 48 */
@@ -248,12 +248,12 @@ EXTERN void		TclBN_mp_zero(mp_int *a);
 EXTERN void		TclBN_reverse(unsigned char *s, int len);
 /* 51 */
 EXTERN int		TclBN_fast_s_mp_mul_digs(mp_int *a, mp_int *b,
-				mp_int *c, int digs);
+        mp_int *c, int digs);
 /* 52 */
 EXTERN int		TclBN_fast_s_mp_sqr(mp_int *a, mp_int *b);
 /* 53 */
 EXTERN int		TclBN_mp_karatsuba_mul(mp_int *a, mp_int *b,
-				mp_int *c);
+                                       mp_int *c);
 /* 54 */
 EXTERN int		TclBN_mp_karatsuba_sqr(mp_int *a, mp_int *b);
 /* 55 */
@@ -264,7 +264,7 @@ EXTERN int		TclBN_mp_toom_sqr(mp_int *a, mp_int *b);
 EXTERN int		TclBN_s_mp_add(mp_int *a, mp_int *b, mp_int *c);
 /* 58 */
 EXTERN int		TclBN_s_mp_mul_digs(mp_int *a, mp_int *b, mp_int *c,
-				int digs);
+                                    int digs);
 /* 59 */
 EXTERN int		TclBN_s_mp_sqr(mp_int *a, mp_int *b);
 /* 60 */
@@ -276,7 +276,8 @@ EXTERN int		TclBN_mp_set_int(mp_int *a, unsigned long i);
 /* 63 */
 EXTERN int		TclBN_mp_cnt_lsb(const mp_int *a);
 
-typedef struct TclTomMathStubs {
+typedef struct TclTomMathStubs
+{
     int magic;
     void *hooks;
 

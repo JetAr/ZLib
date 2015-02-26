@@ -15,8 +15,8 @@
  */
 
 #if defined(USE_TDBC_STUBS)
-    TDBCAPI const char* TdbcInitializeStubs(
-        Tcl_Interp* interp, const char* version, int epoch, int revision);
+TDBCAPI const char* TdbcInitializeStubs(
+    Tcl_Interp* interp, const char* version, int epoch, int revision);
 #    define Tdbc_InitStubs(interp) \
         (TdbcInitializeStubs(interp, TDBC_VERSION, TDBC_STUBS_EPOCH,	\
                              TDBC_STUBS_REVISION))
@@ -39,14 +39,15 @@
 /* 0 */
 TDBCAPI int		Tdbc_Init_ (Tcl_Interp* interp);
 /* 1 */
-TDBCAPI Tcl_Obj*	Tdbc_TokenizeSql (Tcl_Interp* interp, 
-				const char* statement);
+TDBCAPI Tcl_Obj*	Tdbc_TokenizeSql (Tcl_Interp* interp,
+                                      const char* statement);
 /* 2 */
 TDBCAPI const char*	Tdbc_MapSqlState (const char* sqlstate);
 
 #endif /* !defined(USE_TDBC_STUBS) */
 
-typedef struct TdbcStubs {
+typedef struct TdbcStubs
+{
     int magic;
     int epoch;
     int revision;

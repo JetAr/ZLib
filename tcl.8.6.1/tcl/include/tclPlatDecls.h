@@ -33,9 +33,9 @@
  */
 #if (defined(_WIN32) || defined(__CYGWIN__)) && !defined(_TCHAR_DEFINED)
 #   if defined(_UNICODE)
-	typedef wchar_t TCHAR;
+typedef wchar_t TCHAR;
 #   else
-	typedef char TCHAR;
+typedef char TCHAR;
 #   endif
 #   define _TCHAR_DEFINED
 #endif
@@ -49,25 +49,26 @@
 #if defined(__WIN32__) || defined(__CYGWIN__) /* WIN */
 /* 0 */
 EXTERN TCHAR *		Tcl_WinUtfToTChar(const char *str, int len,
-				Tcl_DString *dsPtr);
+                                      Tcl_DString *dsPtr);
 /* 1 */
 EXTERN char *		Tcl_WinTCharToUtf(const TCHAR *str, int len,
-				Tcl_DString *dsPtr);
+                                      Tcl_DString *dsPtr);
 #endif /* WIN */
 #ifdef MAC_OSX_TCL /* MACOSX */
 /* 0 */
 EXTERN int		Tcl_MacOSXOpenBundleResources(Tcl_Interp *interp,
-				const char *bundleName, int hasResourceFile,
-				int maxPathLen, char *libraryPath);
+        const char *bundleName, int hasResourceFile,
+        int maxPathLen, char *libraryPath);
 /* 1 */
 EXTERN int		Tcl_MacOSXOpenVersionedBundleResources(
-				Tcl_Interp *interp, const char *bundleName,
-				const char *bundleVersion,
-				int hasResourceFile, int maxPathLen,
-				char *libraryPath);
+    Tcl_Interp *interp, const char *bundleName,
+    const char *bundleVersion,
+    int hasResourceFile, int maxPathLen,
+    char *libraryPath);
 #endif /* MACOSX */
 
-typedef struct TclPlatStubs {
+typedef struct TclPlatStubs
+{
     int magic;
     void *hooks;
 

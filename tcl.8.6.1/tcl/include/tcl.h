@@ -343,9 +343,9 @@ typedef long LONG;
 
 #ifndef _CLIENTDATA
 #   ifndef NO_VOID
-	typedef void *ClientData;
+typedef void *ClientData;
 #   else
-	typedef int *ClientData;
+typedef int *ClientData;
 #   endif
 #   define _CLIENTDATA
 #endif
@@ -449,35 +449,45 @@ typedef unsigned TCL_WIDE_INT_TYPE	Tcl_WideUInt;
 
 #if defined(__WIN32__)
 #   ifdef __BORLANDC__
-	typedef struct stati64 Tcl_StatBuf;
+typedef struct stati64 Tcl_StatBuf;
 #   elif defined(_WIN64)
-	typedef struct __stat64 Tcl_StatBuf;
+typedef struct __stat64 Tcl_StatBuf;
 #   elif (defined(_MSC_VER) && (_MSC_VER < 1400)) || defined(_USE_32BIT_TIME_T)
-	typedef struct _stati64	Tcl_StatBuf;
+typedef struct _stati64	Tcl_StatBuf;
 #   else
-	typedef struct _stat32i64 Tcl_StatBuf;
+typedef struct _stat32i64 Tcl_StatBuf;
 #   endif /* _MSC_VER < 1400 */
 #elif defined(__CYGWIN__)
-    typedef struct _stat32i64 {
-	dev_t st_dev;
-	unsigned short st_ino;
-	unsigned short st_mode;
-	short st_nlink;
-	short st_uid;
-	short st_gid;
-	/* Here is a 2-byte gap */
-	dev_t st_rdev;
-	/* Here is a 4-byte gap */
-	long long st_size;
-	struct {long tv_sec;} st_atim;
-	struct {long tv_sec;} st_mtim;
-	struct {long tv_sec;} st_ctim;
-	/* Here is a 4-byte gap */
-    } Tcl_StatBuf;
+typedef struct _stat32i64
+{
+    dev_t st_dev;
+    unsigned short st_ino;
+    unsigned short st_mode;
+    short st_nlink;
+    short st_uid;
+    short st_gid;
+    /* Here is a 2-byte gap */
+    dev_t st_rdev;
+    /* Here is a 4-byte gap */
+    long long st_size;
+    struct
+    {
+        long tv_sec;
+    } st_atim;
+    struct
+    {
+        long tv_sec;
+    } st_mtim;
+    struct
+    {
+        long tv_sec;
+    } st_ctim;
+    /* Here is a 4-byte gap */
+} Tcl_StatBuf;
 #elif defined(HAVE_STRUCT_STAT64) && !defined(__APPLE__)
-    typedef struct stat64 Tcl_StatBuf;
+typedef struct stat64 Tcl_StatBuf;
 #else
-    typedef struct stat Tcl_StatBuf;
+typedef struct stat Tcl_StatBuf;
 #endif
 
 /*
@@ -507,26 +517,26 @@ typedef struct Tcl_Interp
      * result. */
 #ifdef USE_INTERP_RESULT
     char *result TCL_DEPRECATED_API("use Tcl_GetStringResult/Tcl_SetResult");
-				/* If the last command returned a string
-				 * result, this points to it. */
+    /* If the last command returned a string
+     * result, this points to it. */
     void (*freeProc) (char *blockPtr)
-	    TCL_DEPRECATED_API("use Tcl_GetStringResult/Tcl_SetResult");
-				/* Zero means the string result is statically
-				 * allocated. TCL_DYNAMIC means it was
-				 * allocated with ckalloc and should be freed
-				 * with ckfree. Other values give the address
-				 * of function to invoke to free the result.
-				 * Tcl_Eval must free it before executing next
-				 * command. */
+    TCL_DEPRECATED_API("use Tcl_GetStringResult/Tcl_SetResult");
+    /* Zero means the string result is statically
+     * allocated. TCL_DYNAMIC means it was
+     * allocated with ckalloc and should be freed
+     * with ckfree. Other values give the address
+     * of function to invoke to free the result.
+     * Tcl_Eval must free it before executing next
+     * command. */
 #else
     char *resultDontUse; /* Don't use in extensions! */
     void (*freeProcDontUse) (char *); /* Don't use in extensions! */
 #endif
 #ifdef USE_INTERP_ERRORLINE
     int errorLine TCL_DEPRECATED_API("use Tcl_GetErrorLine/Tcl_SetErrorLine");
-				/* When TCL_ERROR is returned, this gives the
-				 * line number within the command where the
-				 * error occurred (1 if first line). */
+    /* When TCL_ERROR is returned, this gives the
+     * line number within the command where the
+     * error occurred (1 if first line). */
 #else
     int errorLineDontUse; /* Don't use in extensions! */
 #endif
@@ -630,14 +640,16 @@ typedef void (Tcl_ThreadCreateProc) (ClientData clientData);
  * string.
  */
 
-typedef struct Tcl_RegExpIndices {
+typedef struct Tcl_RegExpIndices
+{
     long start;			/* Character offset of first character in
 				 * match. */
     long end;			/* Character offset of first character after
 				 * the match. */
 } Tcl_RegExpIndices;
 
-typedef struct Tcl_RegExpInfo {
+typedef struct Tcl_RegExpInfo
+{
     int nsubs;			/* Number of subexpressions in the compiled
 				 * expression. */
     Tcl_RegExpIndices *matches;	/* Array of nsubs match offset pairs. */
@@ -697,11 +709,13 @@ typedef struct stat *Tcl_OldStat_;
  * Argument descriptors for math function callbacks in expressions:
  */
 
-typedef enum {
+typedef enum
+{
     TCL_INT, TCL_DOUBLE, TCL_EITHER, TCL_WIDE_INT
 } Tcl_ValueType;
 
-typedef struct Tcl_Value {
+typedef struct Tcl_Value
+{
     Tcl_ValueType type;		/* Indicates intValue or doubleValue is valid,
 				 * or both. */
     long intValue;		/* Integer value. */
@@ -723,24 +737,24 @@ struct Tcl_Obj;
 
 typedef int (Tcl_AppInitProc) (Tcl_Interp *interp);
 typedef int (Tcl_AsyncProc) (ClientData clientData, Tcl_Interp *interp,
-	int code);
+                             int code);
 typedef void (Tcl_ChannelProc) (ClientData clientData, int mask);
 typedef void (Tcl_CloseProc) (ClientData data);
 typedef void (Tcl_CmdDeleteProc) (ClientData clientData);
 typedef int (Tcl_CmdProc) (ClientData clientData, Tcl_Interp *interp,
-	int argc, CONST84 char *argv[]);
+                           int argc, CONST84 char *argv[]);
 typedef void (Tcl_CmdTraceProc) (ClientData clientData, Tcl_Interp *interp,
-	int level, char *command, Tcl_CmdProc *proc,
-	ClientData cmdClientData, int argc, CONST84 char *argv[]);
+                                 int level, char *command, Tcl_CmdProc *proc,
+                                 ClientData cmdClientData, int argc, CONST84 char *argv[]);
 typedef int (Tcl_CmdObjTraceProc) (ClientData clientData, Tcl_Interp *interp,
-	int level, const char *command, Tcl_Command commandInfo, int objc,
-	struct Tcl_Obj *const *objv);
+                                   int level, const char *command, Tcl_Command commandInfo, int objc,
+                                   struct Tcl_Obj *const *objv);
 typedef void (Tcl_CmdObjTraceDeleteProc) (ClientData clientData);
 typedef void (Tcl_DupInternalRepProc) (struct Tcl_Obj *srcPtr,
-	struct Tcl_Obj *dupPtr);
+                                       struct Tcl_Obj *dupPtr);
 typedef int (Tcl_EncodingConvertProc) (ClientData clientData, const char *src,
-	int srcLen, int flags, Tcl_EncodingState *statePtr, char *dst,
-	int dstLen, int *srcReadPtr, int *dstWrotePtr, int *dstCharsPtr);
+                                       int srcLen, int flags, Tcl_EncodingState *statePtr, char *dst,
+                                       int dstLen, int *srcReadPtr, int *dstWrotePtr, int *dstCharsPtr);
 typedef void (Tcl_EncodingFreeProc) (ClientData clientData);
 typedef int (Tcl_EventProc) (Tcl_Event *evPtr, int flags);
 typedef void (Tcl_EventCheckProc) (ClientData clientData, int flags);
@@ -753,26 +767,26 @@ typedef void (Tcl_FreeInternalRepProc) (struct Tcl_Obj *objPtr);
 typedef void (Tcl_FreeProc) (char *blockPtr);
 typedef void (Tcl_IdleProc) (ClientData clientData);
 typedef void (Tcl_InterpDeleteProc) (ClientData clientData,
-	Tcl_Interp *interp);
+                                     Tcl_Interp *interp);
 typedef int (Tcl_MathProc) (ClientData clientData, Tcl_Interp *interp,
-	Tcl_Value *args, Tcl_Value *resultPtr);
+                            Tcl_Value *args, Tcl_Value *resultPtr);
 typedef void (Tcl_NamespaceDeleteProc) (ClientData clientData);
 typedef int (Tcl_ObjCmdProc) (ClientData clientData, Tcl_Interp *interp,
-	int objc, struct Tcl_Obj *const *objv);
+                              int objc, struct Tcl_Obj *const *objv);
 typedef int (Tcl_PackageInitProc) (Tcl_Interp *interp);
 typedef int (Tcl_PackageUnloadProc) (Tcl_Interp *interp, int flags);
 typedef void (Tcl_PanicProc) (const char *format, ...);
 typedef void (Tcl_TcpAcceptProc) (ClientData callbackData, Tcl_Channel chan,
-	char *address, int port);
+                                  char *address, int port);
 typedef void (Tcl_TimerProc) (ClientData clientData);
 typedef int (Tcl_SetFromAnyProc) (Tcl_Interp *interp, struct Tcl_Obj *objPtr);
 typedef void (Tcl_UpdateStringProc) (struct Tcl_Obj *objPtr);
 typedef char * (Tcl_VarTraceProc) (ClientData clientData, Tcl_Interp *interp,
-	CONST84 char *part1, CONST84 char *part2, int flags);
+                                   CONST84 char *part1, CONST84 char *part2, int flags);
 typedef void (Tcl_CommandTraceProc) (ClientData clientData, Tcl_Interp *interp,
-	const char *oldName, const char *newName, int flags);
+                                     const char *oldName, const char *newName, int flags);
 typedef void (Tcl_CreateFileHandlerProc) (int fd, int mask, Tcl_FileProc *proc,
-	ClientData clientData);
+        ClientData clientData);
 typedef void (Tcl_DeleteFileHandlerProc) (int fd);
 typedef void (Tcl_AlertNotifierProc) (ClientData clientData);
 typedef void (Tcl_ServiceModeHookProc) (int mode);
@@ -787,22 +801,23 @@ typedef void (Tcl_MainLoopProc) (void);
  * standard operations on objects of that type.
  */
 
-typedef struct Tcl_ObjType {
+typedef struct Tcl_ObjType
+{
     const char *name;		/* Name of the type, e.g. "int". */
     Tcl_FreeInternalRepProc *freeIntRepProc;
-				/* Called to free any storage for the type's
-				 * internal rep. NULL if the internal rep does
-				 * not need freeing. */
+    /* Called to free any storage for the type's
+     * internal rep. NULL if the internal rep does
+     * not need freeing. */
     Tcl_DupInternalRepProc *dupIntRepProc;
-				/* Called to create a new object as a copy of
-				 * an existing object. */
+    /* Called to create a new object as a copy of
+     * an existing object. */
     Tcl_UpdateStringProc *updateStringProc;
-				/* Called to update the string rep from the
-				 * type's internal representation. */
+    /* Called to update the string rep from the
+     * type's internal representation. */
     Tcl_SetFromAnyProc *setFromAnyProc;
-				/* Called to convert the object's internal rep
-				 * to this type. Frees the internal rep of the
-				 * old type. Returns TCL_ERROR on failure. */
+    /* Called to convert the object's internal rep
+     * to this type. Frees the internal rep of the
+     * old type. Returns TCL_ERROR on failure. */
 } Tcl_ObjType;
 
 /*
@@ -811,7 +826,8 @@ typedef struct Tcl_ObjType {
  * or both.
  */
 
-typedef struct Tcl_Obj {
+typedef struct Tcl_Obj
+{
     int refCount;		/* When 0 the object will be freed. */
     char *bytes;		/* This points to the first byte of the
 				 * object's string representation. The array
@@ -830,24 +846,28 @@ typedef struct Tcl_Obj {
 				 * corresponds to the type of the object's
 				 * internal rep. NULL indicates the object has
 				 * no internal rep (has no type). */
-    union {			/* The internal representation: */
-	long longValue;		/*   - an long integer value. */
-	double doubleValue;	/*   - a double-precision floating value. */
-	void *otherValuePtr;	/*   - another, type-specific value. */
-	Tcl_WideInt wideValue;	/*   - a long long value. */
-	struct {		/*   - internal rep as two pointers. */
-	    void *ptr1;
-	    void *ptr2;
-	} twoPtrValue;
-	struct {		/*   - internal rep as a pointer and a long,
-				 *     the main use of which is a bignum's
-				 *     tightly packed fields, where the alloc,
-				 *     used and signum flags are packed into a
-				 *     single word with everything else hung
-				 *     off the pointer. */
-	    void *ptr;
-	    unsigned long value;
-	} ptrAndLongRep;
+    union  			/* The internal representation: */
+    {
+        long longValue;		/*   - an long integer value. */
+        double doubleValue;	/*   - a double-precision floating value. */
+        void *otherValuePtr;	/*   - another, type-specific value. */
+        Tcl_WideInt wideValue;	/*   - a long long value. */
+        struct  		/*   - internal rep as two pointers. */
+        {
+            void *ptr1;
+            void *ptr2;
+        } twoPtrValue;
+        struct
+        {
+            /*   - internal rep as a pointer and a long,
+            			 *     the main use of which is a bignum's
+            			 *     tightly packed fields, where the alloc,
+            			 *     used and signum flags are packed into a
+            			 *     single word with everything else hung
+            			 *     off the pointer. */
+            void *ptr;
+            unsigned long value;
+        } ptrAndLongRep;
     } internalRep;
 } Tcl_Obj;
 
@@ -870,7 +890,8 @@ int		Tcl_IsShared(Tcl_Obj *objPtr);
  * typically allocated on the stack.
  */
 
-typedef struct Tcl_SavedResult {
+typedef struct Tcl_SavedResult
+{
     char *result;
     Tcl_FreeProc *freeProc;
     Tcl_Obj *objResultPtr;
@@ -887,7 +908,8 @@ typedef struct Tcl_SavedResult {
  * tclInt.h).
  */
 
-typedef struct Tcl_Namespace {
+typedef struct Tcl_Namespace
+{
     char *name;			/* The namespace's name within its parent
 				 * namespace. This contains no ::'s. The name
 				 * of the global namespace is "" although "::"
@@ -897,12 +919,12 @@ typedef struct Tcl_Namespace {
     ClientData clientData;	/* Arbitrary value associated with this
 				 * namespace. */
     Tcl_NamespaceDeleteProc *deleteProc;
-				/* Function invoked when deleting the
-				 * namespace to, e.g., free clientData. */
+    /* Function invoked when deleting the
+     * namespace to, e.g., free clientData. */
     struct Tcl_Namespace *parentPtr;
-				/* Points to the namespace that contains this
-				 * one. NULL if this is the global
-				 * namespace. */
+    /* Points to the namespace that contains this
+     * one. NULL if this is the global
+     * namespace. */
 } Tcl_Namespace;
 
 /*
@@ -928,7 +950,8 @@ typedef struct Tcl_Namespace {
  * CallFrame structure in tclInt.h. If you change one, change the other.
  */
 
-typedef struct Tcl_CallFrame {
+typedef struct Tcl_CallFrame
+{
     Tcl_Namespace *nsPtr;
     int dummy1;
     int dummy2;
@@ -960,7 +983,8 @@ typedef struct Tcl_CallFrame {
  * then calls the other function.
  */
 
-typedef struct Tcl_CmdInfo {
+typedef struct Tcl_CmdInfo
+{
     int isNativeObjectProc;	/* 1 if objProc was registered by a call to
 				 * Tcl_CreateObjCommand; 0 otherwise.
 				 * Tcl_SetCmdInfo does not modify this
@@ -970,8 +994,8 @@ typedef struct Tcl_CmdInfo {
     Tcl_CmdProc *proc;		/* Command's string-based function. */
     ClientData clientData;	/* ClientData for string proc. */
     Tcl_CmdDeleteProc *deleteProc;
-				/* Function to call when command is
-				 * deleted. */
+    /* Function to call when command is
+     * deleted. */
     ClientData deleteData;	/* Value to pass to deleteProc (usually the
 				 * same as clientData). */
     Tcl_Namespace *namespacePtr;/* Points to the namespace that contains this
@@ -989,7 +1013,8 @@ typedef struct Tcl_CmdInfo {
  */
 
 #define TCL_DSTRING_STATIC_SIZE 200
-typedef struct Tcl_DString {
+typedef struct Tcl_DString
+{
     char *string;		/* Points to beginning of string: either
 				 * staticSpace below or a malloced array. */
     int length;			/* Number of non-NULL characters in the
@@ -997,8 +1022,8 @@ typedef struct Tcl_DString {
     int spaceAvl;		/* Total number of bytes available for the
 				 * string and its terminating NULL char. */
     char staticSpace[TCL_DSTRING_STATIC_SIZE];
-				/* Space to use in common case where string is
-				 * small. */
+    /* Space to use in common case where string is
+     * small. */
 } Tcl_DString;
 
 #define Tcl_DStringLength(dsPtr) ((dsPtr)->length)
@@ -1165,7 +1190,7 @@ typedef struct Tcl_HashEntry Tcl_HashEntry;
 typedef unsigned (Tcl_HashKeyProc) (Tcl_HashTable *tablePtr, void *keyPtr);
 typedef int (Tcl_CompareHashKeysProc) (void *keyPtr, Tcl_HashEntry *hPtr);
 typedef Tcl_HashEntry * (Tcl_AllocHashEntryProc) (Tcl_HashTable *tablePtr,
-	void *keyPtr);
+        void *keyPtr);
 typedef void (Tcl_FreeHashEntryProc) (Tcl_HashEntry *hPtr);
 
 /*
@@ -1185,7 +1210,8 @@ typedef void (Tcl_FreeHashEntryProc) (Tcl_HashEntry *hPtr);
  * should access any of these fields directly; use the macros defined below.
  */
 
-struct Tcl_HashEntry {
+struct Tcl_HashEntry
+{
     Tcl_HashEntry *nextPtr;	/* Pointer to next entry in this hash bucket,
 				 * or NULL for end of chain. */
     Tcl_HashTable *tablePtr;	/* Pointer to table containing entry. */
@@ -1200,13 +1226,14 @@ struct Tcl_HashEntry {
 #endif
     ClientData clientData;	/* Application stores something here with
 				 * Tcl_SetHashValue. */
-    union {			/* Key has one of these forms: */
-	char *oneWordValue;	/* One-word value for key. */
-	Tcl_Obj *objPtr;	/* Tcl_Obj * key value. */
-	int words[1];		/* Multiple integer words for key. The actual
+    union  			/* Key has one of these forms: */
+    {
+        char *oneWordValue;	/* One-word value for key. */
+        Tcl_Obj *objPtr;	/* Tcl_Obj * key value. */
+        int words[1];		/* Multiple integer words for key. The actual
 				 * size will be as large as necessary for this
 				 * table's keys. */
-	char string[1];		/* String for key. The actual size will be as
+        char string[1];		/* String for key. The actual size will be as
 				 * large as needed to hold the key. */
     } key;			/* MUST BE LAST FIELD IN RECORD!! */
 };
@@ -1234,42 +1261,43 @@ struct Tcl_HashEntry {
  */
 
 #define TCL_HASH_KEY_TYPE_VERSION 1
-struct Tcl_HashKeyType {
+struct Tcl_HashKeyType
+{
     int version;		/* Version of the table. If this structure is
 				 * extended in future then the version can be
 				 * used to distinguish between different
 				 * structures. */
     int flags;			/* Flags, see above for details. */
     Tcl_HashKeyProc *hashKeyProc;
-				/* Calculates a hash value for the key. If
-				 * this is NULL then the pointer itself is
-				 * used as a hash value. */
+    /* Calculates a hash value for the key. If
+     * this is NULL then the pointer itself is
+     * used as a hash value. */
     Tcl_CompareHashKeysProc *compareKeysProc;
-				/* Compares two keys and returns zero if they
-				 * do not match, and non-zero if they do. If
-				 * this is NULL then the pointers are
-				 * compared. */
+    /* Compares two keys and returns zero if they
+     * do not match, and non-zero if they do. If
+     * this is NULL then the pointers are
+     * compared. */
     Tcl_AllocHashEntryProc *allocEntryProc;
-				/* Called to allocate memory for a new entry,
-				 * i.e. if the key is a string then this could
-				 * allocate a single block which contains
-				 * enough space for both the entry and the
-				 * string. Only the key field of the allocated
-				 * Tcl_HashEntry structure needs to be filled
-				 * in. If something else needs to be done to
-				 * the key, i.e. incrementing a reference
-				 * count then that should be done by this
-				 * function. If this is NULL then Tcl_Alloc is
-				 * used to allocate enough space for a
-				 * Tcl_HashEntry and the key pointer is
-				 * assigned to key.oneWordValue. */
+    /* Called to allocate memory for a new entry,
+     * i.e. if the key is a string then this could
+     * allocate a single block which contains
+     * enough space for both the entry and the
+     * string. Only the key field of the allocated
+     * Tcl_HashEntry structure needs to be filled
+     * in. If something else needs to be done to
+     * the key, i.e. incrementing a reference
+     * count then that should be done by this
+     * function. If this is NULL then Tcl_Alloc is
+     * used to allocate enough space for a
+     * Tcl_HashEntry and the key pointer is
+     * assigned to key.oneWordValue. */
     Tcl_FreeHashEntryProc *freeEntryProc;
-				/* Called to free memory associated with an
-				 * entry. If something else needs to be done
-				 * to the key, i.e. decrementing a reference
-				 * count then that should be done by this
-				 * function. If this is NULL then Tcl_Free is
-				 * used to free the Tcl_HashEntry. */
+    /* Called to free memory associated with an
+     * entry. If something else needs to be done
+     * to the key, i.e. decrementing a reference
+     * count then that should be done by this
+     * function. If this is NULL then Tcl_Free is
+     * used to free the Tcl_HashEntry. */
 };
 
 /*
@@ -1279,13 +1307,14 @@ struct Tcl_HashKeyType {
  */
 
 #define TCL_SMALL_HASH_TABLE 4
-struct Tcl_HashTable {
+struct Tcl_HashTable
+{
     Tcl_HashEntry **buckets;	/* Pointer to bucket array. Each element
 				 * points to first entry in bucket's hash
 				 * chain, or NULL. */
     Tcl_HashEntry *staticBuckets[TCL_SMALL_HASH_TABLE];
-				/* Bucket array used for small tables (to
-				 * avoid mallocs and frees). */
+    /* Bucket array used for small tables (to
+     * avoid mallocs and frees). */
     int numBuckets;		/* Total number of buckets allocated at
 				 * **bucketPtr. */
     int numEntries;		/* Total number of entries present in
@@ -1303,10 +1332,10 @@ struct Tcl_HashTable {
 				 * key. */
     Tcl_HashEntry *(*findProc) (Tcl_HashTable *tablePtr, const char *key);
     Tcl_HashEntry *(*createProc) (Tcl_HashTable *tablePtr, const char *key,
-	    int *newPtr);
+                                  int *newPtr);
     const Tcl_HashKeyType *typePtr;
-				/* Type of the keys used in the
-				 * Tcl_HashTable. */
+    /* Type of the keys used in the
+     * Tcl_HashTable. */
 };
 
 /*
@@ -1314,7 +1343,8 @@ struct Tcl_HashTable {
  * hash tables:
  */
 
-typedef struct Tcl_HashSearch {
+typedef struct Tcl_HashSearch
+{
     Tcl_HashTable *tablePtr;	/* Table being searched. */
     int nextIndex;		/* Index of next bucket to be enumerated after
 				 * present one. */
@@ -1354,7 +1384,8 @@ typedef struct Tcl_HashSearch {
  * tclDictObj.c
  */
 
-typedef struct {
+typedef struct
+{
     void *next;			/* Search position for underlying hash
 				 * table. */
     int epoch;			/* Epoch marker for dictionary being searched,
@@ -1384,7 +1415,8 @@ typedef struct {
  * followed by additional information specific to that event.
  */
 
-struct Tcl_Event {
+struct Tcl_Event
+{
     Tcl_EventProc *proc;	/* Function to call to service this event. */
     struct Tcl_Event *nextPtr;	/* Next in list of pending events, or NULL. */
 };
@@ -1393,7 +1425,8 @@ struct Tcl_Event {
  * Positions to pass to Tcl_QueueEvent:
  */
 
-typedef enum {
+typedef enum
+{
     TCL_QUEUE_TAIL, TCL_QUEUE_HEAD, TCL_QUEUE_MARK
 } Tcl_QueuePosition;
 
@@ -1411,7 +1444,8 @@ typedef enum {
  * On Unix systems the epoch is Midnight Jan 1, 1970 GMT.
  */
 
-typedef struct Tcl_Time {
+typedef struct Tcl_Time
+{
     long sec;			/* Seconds. */
     long usec;			/* Microseconds. */
 } Tcl_Time;
@@ -1485,39 +1519,39 @@ typedef void (Tcl_ScaleTimeProc) (Tcl_Time *timebuf, ClientData clientData);
 
 typedef int	(Tcl_DriverBlockModeProc) (ClientData instanceData, int mode);
 typedef int	(Tcl_DriverCloseProc) (ClientData instanceData,
-			Tcl_Interp *interp);
+                                   Tcl_Interp *interp);
 typedef int	(Tcl_DriverClose2Proc) (ClientData instanceData,
-			Tcl_Interp *interp, int flags);
+                                    Tcl_Interp *interp, int flags);
 typedef int	(Tcl_DriverInputProc) (ClientData instanceData, char *buf,
-			int toRead, int *errorCodePtr);
+                                   int toRead, int *errorCodePtr);
 typedef int	(Tcl_DriverOutputProc) (ClientData instanceData,
-			CONST84 char *buf, int toWrite, int *errorCodePtr);
+                                    CONST84 char *buf, int toWrite, int *errorCodePtr);
 typedef int	(Tcl_DriverSeekProc) (ClientData instanceData, long offset,
-			int mode, int *errorCodePtr);
+                                  int mode, int *errorCodePtr);
 typedef int	(Tcl_DriverSetOptionProc) (ClientData instanceData,
-			Tcl_Interp *interp, const char *optionName,
-			const char *value);
+                                       Tcl_Interp *interp, const char *optionName,
+                                       const char *value);
 typedef int	(Tcl_DriverGetOptionProc) (ClientData instanceData,
-			Tcl_Interp *interp, CONST84 char *optionName,
-			Tcl_DString *dsPtr);
+                                       Tcl_Interp *interp, CONST84 char *optionName,
+                                       Tcl_DString *dsPtr);
 typedef void	(Tcl_DriverWatchProc) (ClientData instanceData, int mask);
 typedef int	(Tcl_DriverGetHandleProc) (ClientData instanceData,
-			int direction, ClientData *handlePtr);
+                                       int direction, ClientData *handlePtr);
 typedef int	(Tcl_DriverFlushProc) (ClientData instanceData);
 typedef int	(Tcl_DriverHandlerProc) (ClientData instanceData,
-			int interestMask);
+                                     int interestMask);
 typedef Tcl_WideInt (Tcl_DriverWideSeekProc) (ClientData instanceData,
-			Tcl_WideInt offset, int mode, int *errorCodePtr);
+        Tcl_WideInt offset, int mode, int *errorCodePtr);
 /*
  * TIP #218, Channel Thread Actions
  */
 typedef void	(Tcl_DriverThreadActionProc) (ClientData instanceData,
-			int action);
+        int action);
 /*
  * TIP #208, File Truncation (etc.)
  */
 typedef int	(Tcl_DriverTruncateProc) (ClientData instanceData,
-			Tcl_WideInt length);
+                                      Tcl_WideInt length);
 
 /*
  * struct Tcl_ChannelType:
@@ -1530,74 +1564,75 @@ typedef int	(Tcl_DriverTruncateProc) (ClientData instanceData,
  * of this structure, instead of direct accessing.
  */
 
-typedef struct Tcl_ChannelType {
+typedef struct Tcl_ChannelType
+{
     const char *typeName;	/* The name of the channel type in Tcl
 				 * commands. This storage is owned by channel
 				 * type. */
     Tcl_ChannelTypeVersion version;
-				/* Version of the channel type. */
+    /* Version of the channel type. */
     Tcl_DriverCloseProc *closeProc;
-				/* Function to call to close the channel, or
-				 * TCL_CLOSE2PROC if the close2Proc should be
-				 * used instead. */
+    /* Function to call to close the channel, or
+     * TCL_CLOSE2PROC if the close2Proc should be
+     * used instead. */
     Tcl_DriverInputProc *inputProc;
-				/* Function to call for input on channel. */
+    /* Function to call for input on channel. */
     Tcl_DriverOutputProc *outputProc;
-				/* Function to call for output on channel. */
+    /* Function to call for output on channel. */
     Tcl_DriverSeekProc *seekProc;
-				/* Function to call to seek on the channel.
-				 * May be NULL. */
+    /* Function to call to seek on the channel.
+     * May be NULL. */
     Tcl_DriverSetOptionProc *setOptionProc;
-				/* Set an option on a channel. */
+    /* Set an option on a channel. */
     Tcl_DriverGetOptionProc *getOptionProc;
-				/* Get an option from a channel. */
+    /* Get an option from a channel. */
     Tcl_DriverWatchProc *watchProc;
-				/* Set up the notifier to watch for events on
-				 * this channel. */
+    /* Set up the notifier to watch for events on
+     * this channel. */
     Tcl_DriverGetHandleProc *getHandleProc;
-				/* Get an OS handle from the channel or NULL
-				 * if not supported. */
+    /* Get an OS handle from the channel or NULL
+     * if not supported. */
     Tcl_DriverClose2Proc *close2Proc;
-				/* Function to call to close the channel if
-				 * the device supports closing the read &
-				 * write sides independently. */
+    /* Function to call to close the channel if
+     * the device supports closing the read &
+     * write sides independently. */
     Tcl_DriverBlockModeProc *blockModeProc;
-				/* Set blocking mode for the raw channel. May
-				 * be NULL. */
+    /* Set blocking mode for the raw channel. May
+     * be NULL. */
     /*
      * Only valid in TCL_CHANNEL_VERSION_2 channels or later.
      */
     Tcl_DriverFlushProc *flushProc;
-				/* Function to call to flush a channel. May be
-				 * NULL. */
+    /* Function to call to flush a channel. May be
+     * NULL. */
     Tcl_DriverHandlerProc *handlerProc;
-				/* Function to call to handle a channel event.
-				 * This will be passed up the stacked channel
-				 * chain. */
+    /* Function to call to handle a channel event.
+     * This will be passed up the stacked channel
+     * chain. */
     /*
      * Only valid in TCL_CHANNEL_VERSION_3 channels or later.
      */
     Tcl_DriverWideSeekProc *wideSeekProc;
-				/* Function to call to seek on the channel
-				 * which can handle 64-bit offsets. May be
-				 * NULL, and must be NULL if seekProc is
-				 * NULL. */
+    /* Function to call to seek on the channel
+     * which can handle 64-bit offsets. May be
+     * NULL, and must be NULL if seekProc is
+     * NULL. */
     /*
      * Only valid in TCL_CHANNEL_VERSION_4 channels or later.
      * TIP #218, Channel Thread Actions.
      */
     Tcl_DriverThreadActionProc *threadActionProc;
-				/* Function to call to notify the driver of
-				 * thread specific activity for a channel. May
-				 * be NULL. */
+    /* Function to call to notify the driver of
+     * thread specific activity for a channel. May
+     * be NULL. */
     /*
      * Only valid in TCL_CHANNEL_VERSION_5 channels or later.
      * TIP #208, File Truncation.
      */
     Tcl_DriverTruncateProc *truncateProc;
-				/* Function to call to truncate the underlying
-				 * file to a particular length. May be NULL if
-				 * the channel does not support truncation. */
+    /* Function to call to truncate the underlying
+     * file to a particular length. May be NULL if
+     * the channel does not support truncation. */
 } Tcl_ChannelType;
 
 /*
@@ -1615,7 +1650,8 @@ typedef struct Tcl_ChannelType {
  * Enum for different types of file paths.
  */
 
-typedef enum Tcl_PathType {
+typedef enum Tcl_PathType
+{
     TCL_PATH_ABSOLUTE,
     TCL_PATH_RELATIVE,
     TCL_PATH_VOLUME_RELATIVE
@@ -1626,7 +1662,8 @@ typedef enum Tcl_PathType {
  * glob routines and Tcl_FSMatchInDirectory.
  */
 
-typedef struct Tcl_GlobTypeData {
+typedef struct Tcl_GlobTypeData
+{
     int type;			/* Corresponds to bcdpfls as in 'find -t'. */
     int perm;			/* Corresponds to file permissions. */
     Tcl_Obj *macType;		/* Acceptable Mac type. */
@@ -1666,19 +1703,19 @@ typedef struct Tcl_GlobTypeData {
 typedef int (Tcl_FSStatProc) (Tcl_Obj *pathPtr, Tcl_StatBuf *buf);
 typedef int (Tcl_FSAccessProc) (Tcl_Obj *pathPtr, int mode);
 typedef Tcl_Channel (Tcl_FSOpenFileChannelProc) (Tcl_Interp *interp,
-	Tcl_Obj *pathPtr, int mode, int permissions);
+        Tcl_Obj *pathPtr, int mode, int permissions);
 typedef int (Tcl_FSMatchInDirectoryProc) (Tcl_Interp *interp, Tcl_Obj *result,
-	Tcl_Obj *pathPtr, const char *pattern, Tcl_GlobTypeData *types);
+        Tcl_Obj *pathPtr, const char *pattern, Tcl_GlobTypeData *types);
 typedef Tcl_Obj * (Tcl_FSGetCwdProc) (Tcl_Interp *interp);
 typedef int (Tcl_FSChdirProc) (Tcl_Obj *pathPtr);
 typedef int (Tcl_FSLstatProc) (Tcl_Obj *pathPtr, Tcl_StatBuf *buf);
 typedef int (Tcl_FSCreateDirectoryProc) (Tcl_Obj *pathPtr);
 typedef int (Tcl_FSDeleteFileProc) (Tcl_Obj *pathPtr);
 typedef int (Tcl_FSCopyDirectoryProc) (Tcl_Obj *srcPathPtr,
-	Tcl_Obj *destPathPtr, Tcl_Obj **errorPtr);
+                                       Tcl_Obj *destPathPtr, Tcl_Obj **errorPtr);
 typedef int (Tcl_FSCopyFileProc) (Tcl_Obj *srcPathPtr, Tcl_Obj *destPathPtr);
 typedef int (Tcl_FSRemoveDirectoryProc) (Tcl_Obj *pathPtr, int recursive,
-	Tcl_Obj **errorPtr);
+        Tcl_Obj **errorPtr);
 typedef int (Tcl_FSRenameFileProc) (Tcl_Obj *srcPathPtr, Tcl_Obj *destPathPtr);
 typedef void (Tcl_FSUnloadFileProc) (Tcl_LoadHandle loadHandle);
 typedef Tcl_Obj * (Tcl_FSListVolumesProc) (void);
@@ -1686,19 +1723,19 @@ typedef Tcl_Obj * (Tcl_FSListVolumesProc) (void);
 struct utimbuf;
 typedef int (Tcl_FSUtimeProc) (Tcl_Obj *pathPtr, struct utimbuf *tval);
 typedef int (Tcl_FSNormalizePathProc) (Tcl_Interp *interp, Tcl_Obj *pathPtr,
-	int nextCheckpoint);
+                                       int nextCheckpoint);
 typedef int (Tcl_FSFileAttrsGetProc) (Tcl_Interp *interp, int index,
-	Tcl_Obj *pathPtr, Tcl_Obj **objPtrRef);
+                                      Tcl_Obj *pathPtr, Tcl_Obj **objPtrRef);
 typedef const char *CONST86 * (Tcl_FSFileAttrStringsProc) (Tcl_Obj *pathPtr,
-	Tcl_Obj **objPtrRef);
+        Tcl_Obj **objPtrRef);
 typedef int (Tcl_FSFileAttrsSetProc) (Tcl_Interp *interp, int index,
-	Tcl_Obj *pathPtr, Tcl_Obj *objPtr);
+                                      Tcl_Obj *pathPtr, Tcl_Obj *objPtr);
 typedef Tcl_Obj * (Tcl_FSLinkProc) (Tcl_Obj *pathPtr, Tcl_Obj *toPtr,
-	int linkType);
+                                    int linkType);
 typedef int (Tcl_FSLoadFileProc) (Tcl_Interp *interp, Tcl_Obj *pathPtr,
-	Tcl_LoadHandle *handlePtr, Tcl_FSUnloadFileProc **unloadProcPtr);
+                                  Tcl_LoadHandle *handlePtr, Tcl_FSUnloadFileProc **unloadProcPtr);
 typedef int (Tcl_FSPathInFilesystemProc) (Tcl_Obj *pathPtr,
-	ClientData *clientDataPtr);
+        ClientData *clientDataPtr);
 typedef Tcl_Obj * (Tcl_FSFilesystemPathTypeProc) (Tcl_Obj *pathPtr);
 typedef Tcl_Obj * (Tcl_FSFilesystemSeparatorProc) (Tcl_Obj *pathPtr);
 typedef void (Tcl_FSFreeInternalRepProc) (ClientData clientData);
@@ -1732,65 +1769,66 @@ typedef struct Tcl_FSVersion_ *Tcl_FSVersion;
  * explanations in the structure show the importance of each function.
  */
 
-typedef struct Tcl_Filesystem {
+typedef struct Tcl_Filesystem
+{
     const char *typeName;	/* The name of the filesystem. */
     int structureLength;	/* Length of this structure, so future binary
 				 * compatibility can be assured. */
     Tcl_FSVersion version;	/* Version of the filesystem type. */
     Tcl_FSPathInFilesystemProc *pathInFilesystemProc;
-				/* Function to check whether a path is in this
-				 * filesystem. This is the most important
-				 * filesystem function. */
+    /* Function to check whether a path is in this
+     * filesystem. This is the most important
+     * filesystem function. */
     Tcl_FSDupInternalRepProc *dupInternalRepProc;
-				/* Function to duplicate internal fs rep. May
-				 * be NULL (but then fs is less efficient). */
+    /* Function to duplicate internal fs rep. May
+     * be NULL (but then fs is less efficient). */
     Tcl_FSFreeInternalRepProc *freeInternalRepProc;
-				/* Function to free internal fs rep. Must be
-				 * implemented if internal representations
-				 * need freeing, otherwise it can be NULL. */
+    /* Function to free internal fs rep. Must be
+     * implemented if internal representations
+     * need freeing, otherwise it can be NULL. */
     Tcl_FSInternalToNormalizedProc *internalToNormalizedProc;
-				/* Function to convert internal representation
-				 * to a normalized path. Only required if the
-				 * fs creates pure path objects with no
-				 * string/path representation. */
+    /* Function to convert internal representation
+     * to a normalized path. Only required if the
+     * fs creates pure path objects with no
+     * string/path representation. */
     Tcl_FSCreateInternalRepProc *createInternalRepProc;
-				/* Function to create a filesystem-specific
-				 * internal representation. May be NULL if
-				 * paths have no internal representation, or
-				 * if the Tcl_FSPathInFilesystemProc for this
-				 * filesystem always immediately creates an
-				 * internal representation for paths it
-				 * accepts. */
+    /* Function to create a filesystem-specific
+     * internal representation. May be NULL if
+     * paths have no internal representation, or
+     * if the Tcl_FSPathInFilesystemProc for this
+     * filesystem always immediately creates an
+     * internal representation for paths it
+     * accepts. */
     Tcl_FSNormalizePathProc *normalizePathProc;
-				/* Function to normalize a path.  Should be
-				 * implemented for all filesystems which can
-				 * have multiple string representations for
-				 * the same path object. */
+    /* Function to normalize a path.  Should be
+     * implemented for all filesystems which can
+     * have multiple string representations for
+     * the same path object. */
     Tcl_FSFilesystemPathTypeProc *filesystemPathTypeProc;
-				/* Function to determine the type of a path in
-				 * this filesystem. May be NULL. */
+    /* Function to determine the type of a path in
+     * this filesystem. May be NULL. */
     Tcl_FSFilesystemSeparatorProc *filesystemSeparatorProc;
-				/* Function to return the separator
-				 * character(s) for this filesystem. Must be
-				 * implemented. */
+    /* Function to return the separator
+     * character(s) for this filesystem. Must be
+     * implemented. */
     Tcl_FSStatProc *statProc;	/* Function to process a 'Tcl_FSStat()' call.
 				 * Must be implemented for any reasonable
 				 * filesystem. */
     Tcl_FSAccessProc *accessProc;
-				/* Function to process a 'Tcl_FSAccess()'
-				 * call. Must be implemented for any
-				 * reasonable filesystem. */
+    /* Function to process a 'Tcl_FSAccess()'
+     * call. Must be implemented for any
+     * reasonable filesystem. */
     Tcl_FSOpenFileChannelProc *openFileChannelProc;
-				/* Function to process a
-				 * 'Tcl_FSOpenFileChannel()' call. Must be
-				 * implemented for any reasonable
-				 * filesystem. */
+    /* Function to process a
+     * 'Tcl_FSOpenFileChannel()' call. Must be
+     * implemented for any reasonable
+     * filesystem. */
     Tcl_FSMatchInDirectoryProc *matchInDirectoryProc;
-				/* Function to process a
-				 * 'Tcl_FSMatchInDirectory()'.  If not
-				 * implemented, then glob and recursive copy
-				 * functionality will be lacking in the
-				 * filesystem. */
+    /* Function to process a
+     * 'Tcl_FSMatchInDirectory()'.  If not
+     * implemented, then glob and recursive copy
+     * functionality will be lacking in the
+     * filesystem. */
     Tcl_FSUtimeProc *utimeProc;	/* Function to process a 'Tcl_FSUtime()' call.
 				 * Required to allow setting (not reading) of
 				 * times with 'file mtime', 'file atime' and
@@ -1801,69 +1839,69 @@ typedef struct Tcl_Filesystem {
 				 * filesystem supports links (reading or
 				 * creating). */
     Tcl_FSListVolumesProc *listVolumesProc;
-				/* Function to list any filesystem volumes
-				 * added by this filesystem. Should be
-				 * implemented only if the filesystem adds
-				 * volumes at the head of the filesystem. */
+    /* Function to list any filesystem volumes
+     * added by this filesystem. Should be
+     * implemented only if the filesystem adds
+     * volumes at the head of the filesystem. */
     Tcl_FSFileAttrStringsProc *fileAttrStringsProc;
-				/* Function to list all attributes strings
-				 * which are valid for this filesystem. If not
-				 * implemented the filesystem will not support
-				 * the 'file attributes' command. This allows
-				 * arbitrary additional information to be
-				 * attached to files in the filesystem. */
+    /* Function to list all attributes strings
+     * which are valid for this filesystem. If not
+     * implemented the filesystem will not support
+     * the 'file attributes' command. This allows
+     * arbitrary additional information to be
+     * attached to files in the filesystem. */
     Tcl_FSFileAttrsGetProc *fileAttrsGetProc;
-				/* Function to process a
-				 * 'Tcl_FSFileAttrsGet()' call, used by 'file
-				 * attributes'. */
+    /* Function to process a
+     * 'Tcl_FSFileAttrsGet()' call, used by 'file
+     * attributes'. */
     Tcl_FSFileAttrsSetProc *fileAttrsSetProc;
-				/* Function to process a
-				 * 'Tcl_FSFileAttrsSet()' call, used by 'file
-				 * attributes'.  */
+    /* Function to process a
+     * 'Tcl_FSFileAttrsSet()' call, used by 'file
+     * attributes'.  */
     Tcl_FSCreateDirectoryProc *createDirectoryProc;
-				/* Function to process a
-				 * 'Tcl_FSCreateDirectory()' call. Should be
-				 * implemented unless the FS is read-only. */
+    /* Function to process a
+     * 'Tcl_FSCreateDirectory()' call. Should be
+     * implemented unless the FS is read-only. */
     Tcl_FSRemoveDirectoryProc *removeDirectoryProc;
-				/* Function to process a
-				 * 'Tcl_FSRemoveDirectory()' call. Should be
-				 * implemented unless the FS is read-only. */
+    /* Function to process a
+     * 'Tcl_FSRemoveDirectory()' call. Should be
+     * implemented unless the FS is read-only. */
     Tcl_FSDeleteFileProc *deleteFileProc;
-				/* Function to process a 'Tcl_FSDeleteFile()'
-				 * call. Should be implemented unless the FS
-				 * is read-only. */
+    /* Function to process a 'Tcl_FSDeleteFile()'
+     * call. Should be implemented unless the FS
+     * is read-only. */
     Tcl_FSCopyFileProc *copyFileProc;
-				/* Function to process a 'Tcl_FSCopyFile()'
-				 * call. If not implemented Tcl will fall back
-				 * on open-r, open-w and fcopy as a copying
-				 * mechanism, for copying actions initiated in
-				 * Tcl (not C). */
+    /* Function to process a 'Tcl_FSCopyFile()'
+     * call. If not implemented Tcl will fall back
+     * on open-r, open-w and fcopy as a copying
+     * mechanism, for copying actions initiated in
+     * Tcl (not C). */
     Tcl_FSRenameFileProc *renameFileProc;
-				/* Function to process a 'Tcl_FSRenameFile()'
-				 * call. If not implemented, Tcl will fall
-				 * back on a copy and delete mechanism, for
-				 * rename actions initiated in Tcl (not C). */
+    /* Function to process a 'Tcl_FSRenameFile()'
+     * call. If not implemented, Tcl will fall
+     * back on a copy and delete mechanism, for
+     * rename actions initiated in Tcl (not C). */
     Tcl_FSCopyDirectoryProc *copyDirectoryProc;
-				/* Function to process a
-				 * 'Tcl_FSCopyDirectory()' call. If not
-				 * implemented, Tcl will fall back on a
-				 * recursive create-dir, file copy mechanism,
-				 * for copying actions initiated in Tcl (not
-				 * C). */
+    /* Function to process a
+     * 'Tcl_FSCopyDirectory()' call. If not
+     * implemented, Tcl will fall back on a
+     * recursive create-dir, file copy mechanism,
+     * for copying actions initiated in Tcl (not
+     * C). */
     Tcl_FSLstatProc *lstatProc;	/* Function to process a 'Tcl_FSLstat()' call.
 				 * If not implemented, Tcl will attempt to use
 				 * the 'statProc' defined above instead. */
     Tcl_FSLoadFileProc *loadFileProc;
-				/* Function to process a 'Tcl_FSLoadFile()'
-				 * call. If not implemented, Tcl will fall
-				 * back on a copy to native-temp followed by a
-				 * Tcl_FSLoadFile on that temporary copy. */
+    /* Function to process a 'Tcl_FSLoadFile()'
+     * call. If not implemented, Tcl will fall
+     * back on a copy to native-temp followed by a
+     * Tcl_FSLoadFile on that temporary copy. */
     Tcl_FSGetCwdProc *getCwdProc;
-				/* Function to process a 'Tcl_FSGetCwd()'
-				 * call. Most filesystems need not implement
-				 * this. It will usually only be called once,
-				 * if 'getcwd' is called before 'chdir'. May
-				 * be NULL. */
+    /* Function to process a 'Tcl_FSGetCwd()'
+     * call. Most filesystems need not implement
+     * this. It will usually only be called once,
+     * if 'getcwd' is called before 'chdir'. May
+     * be NULL. */
     Tcl_FSChdirProc *chdirProc;	/* Function to process a 'Tcl_FSChdir()' call.
 				 * If filesystems do not implement this, it
 				 * will be emulated by a series of directory
@@ -1900,7 +1938,8 @@ typedef struct Tcl_Filesystem {
  * override with the Tcl_SetNotifier call.
  */
 
-typedef struct Tcl_NotifierProcs {
+typedef struct Tcl_NotifierProcs
+{
     Tcl_SetTimerProc *setTimerProc;
     Tcl_WaitForEventProc *waitForEventProc;
     Tcl_CreateFileHandlerProc *createFileHandlerProc;
@@ -1920,7 +1959,8 @@ typedef struct Tcl_NotifierProcs {
  * token.
  */
 
-typedef struct Tcl_Token {
+typedef struct Tcl_Token
+{
     int type;			/* Type of token, such as TCL_TOKEN_WORD; see
 				 * below for valid types. */
     const char *start;		/* First character in token. */
@@ -2036,7 +2076,8 @@ typedef struct Tcl_Token {
 
 #define NUM_STATIC_TOKENS 20
 
-typedef struct Tcl_Parse {
+typedef struct Tcl_Parse
+{
     const char *commentStart;	/* Pointer to # that begins the first of one
 				 * or more comments preceding the command. */
     int commentSize;		/* Number of bytes in comments (up through
@@ -2084,11 +2125,11 @@ typedef struct Tcl_Parse {
 				 * This information is used by
 				 * Tcl_CommandComplete. */
     Tcl_Token staticTokens[NUM_STATIC_TOKENS];
-				/* Initial space for tokens for command. This
-				 * space should be large enough to accommodate
-				 * most commands; dynamic space is allocated
-				 * for very large commands that don't fit
-				 * here. */
+    /* Initial space for tokens for command. This
+     * space should be large enough to accommodate
+     * most commands; dynamic space is allocated
+     * for very large commands that don't fit
+     * here. */
 } Tcl_Parse;
 
 /*
@@ -2097,19 +2138,20 @@ typedef struct Tcl_Parse {
  * together all the functions that are used by the specific encoding.
  */
 
-typedef struct Tcl_EncodingType {
+typedef struct Tcl_EncodingType
+{
     const char *encodingName;	/* The name of the encoding, e.g. "euc-jp".
 				 * This name is the unique key for this
 				 * encoding type. */
     Tcl_EncodingConvertProc *toUtfProc;
-				/* Function to convert from external encoding
-				 * into UTF-8. */
+    /* Function to convert from external encoding
+     * into UTF-8. */
     Tcl_EncodingConvertProc *fromUtfProc;
-				/* Function to convert from UTF-8 into
-				 * external encoding. */
+    /* Function to convert from UTF-8 into
+     * external encoding. */
     Tcl_EncodingFreeProc *freeProc;
-				/* If non-NULL, function to call when this
-				 * encoding is deleted. */
+    /* If non-NULL, function to call when this
+     * encoding is deleted. */
     ClientData clientData;	/* Arbitrary value associated with encoding
 				 * type. Passed to conversion functions. */
     int nullSize;		/* Number of zero bytes that signify
@@ -2206,15 +2248,15 @@ typedef struct Tcl_EncodingType {
  */
 
 #if TCL_UTF_MAX > 4
-    /*
-     * unsigned int isn't 100% accurate as it should be a strict 4-byte value
-     * (perhaps wchar_t). 64-bit systems may have troubles. The size of this
-     * value must be reflected correctly in regcustom.h and
-     * in tclEncoding.c.
-     * XXX: Tcl is currently UCS-2 and planning UTF-16 for the Unicode
-     * XXX: string rep that Tcl_UniChar represents.  Changing the size
-     * XXX: of Tcl_UniChar is /not/ supported.
-     */
+/*
+ * unsigned int isn't 100% accurate as it should be a strict 4-byte value
+ * (perhaps wchar_t). 64-bit systems may have troubles. The size of this
+ * value must be reflected correctly in regcustom.h and
+ * in tclEncoding.c.
+ * XXX: Tcl is currently UCS-2 and planning UTF-16 for the Unicode
+ * XXX: string rep that Tcl_UniChar represents.  Changing the size
+ * XXX: of Tcl_UniChar is /not/ supported.
+ */
 typedef unsigned int Tcl_UniChar;
 #else
 typedef unsigned short Tcl_UniChar;
@@ -2226,7 +2268,8 @@ typedef unsigned short Tcl_UniChar;
  * provide the system with the embedded configuration data.
  */
 
-typedef struct Tcl_Config {
+typedef struct Tcl_Config
+{
     const char *key;		/* Configuration key to register. ASCII
 				 * encoded, thus UTF-8. */
     const char *value;		/* The value associated with the key. System
@@ -2267,7 +2310,8 @@ typedef unsigned int mp_digit;
  * Modifications from the original are copyright (c) Sam Bromley 2006
  */
 
-typedef struct {
+typedef struct
+{
     int type;			/* Indicates the option type; see below. */
     const char *keyStr;		/* The key string that flags the option in the
 				 * argv array. */
@@ -2301,9 +2345,9 @@ typedef struct {
  */
 
 typedef int (Tcl_ArgvFuncProc)(ClientData clientData, Tcl_Obj *objPtr,
-	void *dstPtr);
+                               void *dstPtr);
 typedef int (Tcl_ArgvGenFuncProc)(ClientData clientData, Tcl_Interp *interp,
-	int objc, Tcl_Obj *const *objv, void *dstPtr);
+                                  int objc, Tcl_Obj *const *objv, void *dstPtr);
 
 /*
  * Shorthand for commonly used argTable entries.
@@ -2373,7 +2417,7 @@ typedef int (Tcl_ArgvGenFuncProc)(ClientData clientData, Tcl_Interp *interp,
  */
 
 typedef int (Tcl_NRPostProc) (ClientData data[], Tcl_Interp *interp,
-				int result);
+                              int result);
 
 /*
  *----------------------------------------------------------------------------
@@ -2394,9 +2438,9 @@ typedef int (Tcl_NRPostProc) (ClientData data[], Tcl_Interp *interp,
  */
 
 const char *		Tcl_InitStubs(Tcl_Interp *interp, const char *version,
-			    int exact);
+                                  int exact);
 const char *		TclTomMathInitializeStubs(Tcl_Interp *interp,
-			    const char *version, int epoch, int revision);
+        const char *version, int epoch, int revision);
 
 /*
  * When not using stubs, make it a macro.
@@ -2419,9 +2463,9 @@ const char *		TclTomMathInitializeStubs(Tcl_Interp *interp,
 #define Tcl_Main(argc, argv, proc) Tcl_MainEx(argc, argv, proc, \
 	    ((Tcl_CreateInterp)()))
 EXTERN void		Tcl_MainEx(int argc, char **argv,
-			    Tcl_AppInitProc *appInitProc, Tcl_Interp *interp);
+                           Tcl_AppInitProc *appInitProc, Tcl_Interp *interp);
 EXTERN const char *	Tcl_PkgInitStubsCheck(Tcl_Interp *interp,
-			    const char *version, int exact);
+        const char *version, int exact);
 #if defined(TCL_THREADS) && defined(USE_THREAD_ALLOC)
 EXTERN void		Tcl_GetMemoryInfo(Tcl_DString *dsPtr);
 #endif
@@ -2498,10 +2542,10 @@ EXTERN void		Tcl_GetMemoryInfo(Tcl_DString *dsPtr);
 #else
 #   define Tcl_IncrRefCount(objPtr) \
 	++(objPtr)->refCount
-    /*
-     * Use do/while0 idiom for optimum correctness without compiler warnings.
-     * http://c2.com/cgi/wiki?TrivialDoWhileLoop
-     */
+/*
+ * Use do/while0 idiom for optimum correctness without compiler warnings.
+ * http://c2.com/cgi/wiki?TrivialDoWhileLoop
+ */
 #   define Tcl_DecrRefCount(objPtr) \
 	do { \
 	    Tcl_Obj *_objPtr = (objPtr); \

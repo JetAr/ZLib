@@ -25,7 +25,7 @@
 #endif
 
 extern const char *TclOOInitializeStubs(
-	Tcl_Interp *, const char *version);
+    Tcl_Interp *, const char *version);
 #define Tcl_OOInitStubs(interp) TclOOInitializeStubs((interp), TCLOO_VERSION)
 
 /*
@@ -58,13 +58,13 @@ typedef struct Tcl_ObjectContext_ *Tcl_ObjectContext;
  */
 
 typedef int (Tcl_MethodCallProc)(ClientData clientData, Tcl_Interp *interp,
-	Tcl_ObjectContext objectContext, int objc, Tcl_Obj *const *objv);
+                                 Tcl_ObjectContext objectContext, int objc, Tcl_Obj *const *objv);
 typedef void (Tcl_MethodDeleteProc)(ClientData clientData);
 typedef int (Tcl_CloneProc)(Tcl_Interp *interp, ClientData oldClientData,
-	ClientData *newClientData);
+                            ClientData *newClientData);
 typedef void (Tcl_ObjectMetadataDeleteProc)(ClientData clientData);
 typedef int (Tcl_ObjectMapMethodNameProc)(Tcl_Interp *interp,
-	Tcl_Object object, Tcl_Class *startClsPtr, Tcl_Obj *methodNameObj);
+        Tcl_Object object, Tcl_Class *startClsPtr, Tcl_Obj *methodNameObj);
 
 /*
  * The type of a method implementation. This describes how to call the method
@@ -72,18 +72,19 @@ typedef int (Tcl_ObjectMapMethodNameProc)(Tcl_Interp *interp,
  * how to create a clone of it (when the object or class is copied).
  */
 
-typedef struct {
+typedef struct
+{
     int version;		/* Structure version field. Always to be equal
 				 * to TCL_OO_METHOD_VERSION_CURRENT in
 				 * declarations. */
     const char *name;		/* Name of this type of method, mostly for
 				 * debugging purposes. */
     Tcl_MethodCallProc *callProc;
-				/* How to invoke this method. */
+    /* How to invoke this method. */
     Tcl_MethodDeleteProc *deleteProc;
-				/* How to delete this method's type-specific
-				 * data, or NULL if the type-specific data
-				 * does not need deleting. */
+    /* How to delete this method's type-specific
+     * data, or NULL if the type-specific data
+     * does not need deleting. */
     Tcl_CloneProc *cloneProc;	/* How to copy this method's type-specific
 				 * data, or NULL if the type-specific data can
 				 * be copied directly. */
@@ -103,14 +104,15 @@ typedef struct {
  * clone of it (when the object or class is copied).
  */
 
-typedef struct {
+typedef struct
+{
     int version;		/* Structure version field. Always to be equal
 				 * to TCL_OO_METADATA_VERSION_CURRENT in
 				 * declarations. */
     const char *name;
     Tcl_ObjectMetadataDeleteProc *deleteProc;
-				/* How to delete the metadata. This must not
-				 * be NULL. */
+    /* How to delete the metadata. This must not
+     * be NULL. */
     Tcl_CloneProc *cloneProc;	/* How to copy the metadata, or NULL if the
 				 * type-specific data can be copied
 				 * directly. */

@@ -6,7 +6,7 @@
 #if defined(USE_ITCL_STUBS)
 
 ITCLAPI const char *Itcl_InitStubs(
-	Tcl_Interp *, const char *version, int exact);
+    Tcl_Interp *, const char *version, int exact);
 #else
 
 #define Itcl_InitStubs(interp, version, exact) Tcl_PkgRequire(interp,"itcl",version,exact)
@@ -27,18 +27,18 @@ ITCLAPI const char *Itcl_InitStubs(
 /* Slot 1 is reserved */
 /* 2 */
 ITCLAPI int		Itcl_RegisterC(Tcl_Interp *interp, const char *name,
-				Tcl_CmdProc *proc, ClientData clientData,
-				Tcl_CmdDeleteProc *deleteProc);
+                               Tcl_CmdProc *proc, ClientData clientData,
+                               Tcl_CmdDeleteProc *deleteProc);
 /* 3 */
 ITCLAPI int		Itcl_RegisterObjC(Tcl_Interp *interp,
-				const char *name, Tcl_ObjCmdProc *proc,
-				ClientData clientData,
-				Tcl_CmdDeleteProc *deleteProc);
+                                  const char *name, Tcl_ObjCmdProc *proc,
+                                  ClientData clientData,
+                                  Tcl_CmdDeleteProc *deleteProc);
 /* 4 */
 ITCLAPI int		Itcl_FindC(Tcl_Interp *interp, const char *name,
-				Tcl_CmdProc **argProcPtr,
-				Tcl_ObjCmdProc **objProcPtr,
-				ClientData *cDataPtr);
+                           Tcl_CmdProc **argProcPtr,
+                           Tcl_ObjCmdProc **objProcPtr,
+                           ClientData *cDataPtr);
 /* 5 */
 ITCLAPI void		Itcl_InitStack(Itcl_Stack *stack);
 /* 6 */
@@ -63,18 +63,18 @@ ITCLAPI Itcl_ListElem *	 Itcl_DeleteListElem(Itcl_ListElem *elemPtr);
 ITCLAPI Itcl_ListElem *	 Itcl_InsertList(Itcl_List *listPtr, ClientData val);
 /* 16 */
 ITCLAPI Itcl_ListElem *	 Itcl_InsertListElem(Itcl_ListElem *pos,
-				ClientData val);
+        ClientData val);
 /* 17 */
 ITCLAPI Itcl_ListElem *	 Itcl_AppendList(Itcl_List *listPtr, ClientData val);
 /* 18 */
 ITCLAPI Itcl_ListElem *	 Itcl_AppendListElem(Itcl_ListElem *pos,
-				ClientData val);
+        ClientData val);
 /* 19 */
 ITCLAPI void		Itcl_SetListValue(Itcl_ListElem *elemPtr,
-				ClientData val);
+                                      ClientData val);
 /* 20 */
 ITCLAPI void		Itcl_EventuallyFree(ClientData cdata,
-				Tcl_FreeProc *fproc);
+                                        Tcl_FreeProc *fproc);
 /* 21 */
 ITCLAPI void		Itcl_PreserveData(ClientData cdata);
 /* 22 */
@@ -83,15 +83,17 @@ ITCLAPI void		Itcl_ReleaseData(ClientData cdata);
 ITCLAPI Itcl_InterpState Itcl_SaveInterpState(Tcl_Interp *interp, int status);
 /* 24 */
 ITCLAPI int		Itcl_RestoreInterpState(Tcl_Interp *interp,
-				Itcl_InterpState state);
+                                        Itcl_InterpState state);
 /* 25 */
 ITCLAPI void		Itcl_DiscardInterpState(Itcl_InterpState state);
 
-typedef struct ItclStubHooks {
+typedef struct ItclStubHooks
+{
     const struct ItclIntStubs *itclIntStubs;
 } ItclStubHooks;
 
-typedef struct ItclStubs {
+typedef struct ItclStubs
+{
     int magic;
     int epoch;
     int revision;

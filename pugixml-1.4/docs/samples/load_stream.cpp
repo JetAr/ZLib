@@ -7,11 +7,11 @@
 void print_doc(const char* message, const pugi::xml_document& doc, const pugi::xml_parse_result& result)
 {
     std::cout
-        << message
-        << "\t: load result '" << result.description() << "'"
-        << ", first character of root name: U+" << std::hex << std::uppercase << std::setw(4) << std::setfill('0') << pugi::as_wide(doc.first_child().name())[0]
-        << ", year: " << doc.first_child().first_child().first_child().child_value()
-        << std::endl;
+            << message
+            << "\t: load result '" << result.description() << "'"
+            << ", first character of root name: U+" << std::hex << std::uppercase << std::setw(4) << std::setfill('0') << pugi::as_wide(doc.first_child().name())[0]
+            << ", year: " << doc.first_child().first_child().first_child().child_value()
+            << std::endl;
 }
 
 bool try_imbue(std::wistream& stream, const char* name)
@@ -33,10 +33,10 @@ int main()
     pugi::xml_document doc;
 
     {
-    //[code_load_stream
+        //[code_load_stream
         std::ifstream stream("weekly-utf-8.xml");
         pugi::xml_parse_result result = doc.load(stream);
-    //]
+        //]
 
         // first character of root name: U+9031, year: 1997
         print_doc("UTF8 file from narrow stream", doc, result);
@@ -80,7 +80,7 @@ int main()
         std::wifstream stream("weekly-shift_jis.xml");
 
         if (try_imbue(stream, ".932") || // try Microsoft encoding
-            try_imbue(stream, "ja_JP.SJIS")) // try Linux encoding; run "localedef -i ja_JP -c -f SHIFT_JIS /usr/lib/locale/ja_JP.SJIS" to get it
+                try_imbue(stream, "ja_JP.SJIS")) // try Linux encoding; run "localedef -i ja_JP -c -f SHIFT_JIS /usr/lib/locale/ja_JP.SJIS" to get it
         {
             pugi::xml_parse_result result = doc.load(stream);
 

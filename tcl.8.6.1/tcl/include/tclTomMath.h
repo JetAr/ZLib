@@ -61,75 +61,75 @@ extern "C" {
  */
 #ifdef MP_8BIT
 #ifndef MP_DIGIT_DECLARED
-   typedef unsigned char      mp_digit;
+typedef unsigned char      mp_digit;
 #define MP_DIGIT_DECLARED
 #endif
-   typedef unsigned short     mp_word;
+typedef unsigned short     mp_word;
 #elif defined(MP_16BIT)
 #ifndef MP_DIGIT_DECLARED
-   typedef unsigned short     mp_digit;
+typedef unsigned short     mp_digit;
 #define MP_DIGIT_DECLARED
 #endif
-   typedef unsigned long      mp_word;
+typedef unsigned long      mp_word;
 #elif defined(MP_64BIT)
-   /* for GCC only on supported platforms */
+/* for GCC only on supported platforms */
 #ifndef CRYPT
-   typedef unsigned long long ulong64;
-   typedef signed long long   long64;
+typedef unsigned long long ulong64;
+typedef signed long long   long64;
 #endif
 
 #ifndef MP_DIGIT_DECLARED
-   typedef unsigned long      mp_digit;
+typedef unsigned long      mp_digit;
 #define MP_DIGIT_DECLARED
 #endif
-   typedef unsigned long      mp_word __attribute__ ((mode(TI)));
+typedef unsigned long      mp_word __attribute__ ((mode(TI)));
 
 #  define DIGIT_BIT          60
 #else
-   /* this is the default case, 28-bit digits */
-   
-   /* this is to make porting into LibTomCrypt easier :-) */
+/* this is the default case, 28-bit digits */
+
+/* this is to make porting into LibTomCrypt easier :-) */
 #ifndef CRYPT
 #  if defined(_MSC_VER) || defined(__BORLANDC__)
-      typedef unsigned __int64   ulong64;
-      typedef signed __int64     long64;
+typedef unsigned __int64   ulong64;
+typedef signed __int64     long64;
 #  else
-      typedef unsigned long long ulong64;
-      typedef signed long long   long64;
+typedef unsigned long long ulong64;
+typedef signed long long   long64;
 #  endif
 #endif
 
 #ifndef MP_DIGIT_DECLARED
-   typedef unsigned int      mp_digit;
+typedef unsigned int      mp_digit;
 #define MP_DIGIT_DECLARED
 #endif
-   typedef ulong64            mp_word;
+typedef ulong64            mp_word;
 
-#ifdef MP_31BIT   
-   /* this is an extension that uses 31-bit digits */
+#ifdef MP_31BIT
+/* this is an extension that uses 31-bit digits */
 #  define DIGIT_BIT          31
 #else
-   /* default case is 28-bit digits, defines MP_28BIT as a handy macro to test */
+/* default case is 28-bit digits, defines MP_28BIT as a handy macro to test */
 #  define DIGIT_BIT          28
 #  define MP_28BIT
-#endif   
+#endif
 #endif
 
 /* define heap macros */
 #if 0 /* these are macros in tclTomMathDecls.h */
 #ifndef CRYPT
-   /* default to libc stuff */
+/* default to libc stuff */
 #  ifndef XMALLOC
 #     define XMALLOC  malloc
 #     define XFREE    free
 #     define XREALLOC realloc
 #     define XCALLOC  calloc
 #  else
-      /* prototypes for our heap functions */
-      extern void *XMALLOC(size_t n);
-      extern void *XREALLOC(void *p, size_t n);
-      extern void *XCALLOC(size_t n, size_t s);
-      extern void XFREE(void *p);
+/* prototypes for our heap functions */
+extern void *XMALLOC(size_t n);
+extern void *XREALLOC(void *p, size_t n);
+extern void *XCALLOC(size_t n, size_t s);
+extern void XFREE(void *p);
 #  endif
 #endif
 #endif
@@ -170,9 +170,9 @@ typedef int           mp_err;
 /* you'll have to tune these... */
 #if defined(BUILD_tcl) || !defined(_WIN32)
 MODULE_SCOPE int KARATSUBA_MUL_CUTOFF,
-           KARATSUBA_SQR_CUTOFF,
-           TOOM_MUL_CUTOFF,
-           TOOM_SQR_CUTOFF;
+             KARATSUBA_SQR_CUTOFF,
+             TOOM_MUL_CUTOFF,
+             TOOM_SQR_CUTOFF;
 #endif
 
 /* define this to use lower memory usage routines (exptmods mostly) */
@@ -195,7 +195,8 @@ MODULE_SCOPE int KARATSUBA_MUL_CUTOFF,
 #define MP_INT_DECLARED
 typedef struct mp_int mp_int;
 #endif
-struct mp_int {
+struct mp_int
+{
     int used, alloc, sign;
     mp_digit *dp;
 };
@@ -646,7 +647,7 @@ int mp_prime_miller_rabin(mp_int *a, mp_int *b, int *result);
 */
 
 /* This gives [for a given bit size] the number of trials required
- * such that Miller-Rabin gives a prob of failure lower than 2^-96 
+ * such that Miller-Rabin gives a prob of failure lower than 2^-96
  */
 /*
 int mp_prime_rabin_miller_trials(int size);
@@ -673,7 +674,7 @@ int mp_prime_next_prime(mp_int *a, int t, int bbs_style);
 */
 
 /* makes a truly random prime of a given size (bytes),
- * call with bbs = 1 if you want it to be congruent to 3 mod 4 
+ * call with bbs = 1 if you want it to be congruent to 3 mod 4
  *
  * You have to supply a callback which fills in a buffer with random bytes.  "dat" is a parameter you can
  * have passed to the callback (e.g. a state or something).  This function doesn't use "dat" itself
@@ -686,7 +687,7 @@ int mp_prime_next_prime(mp_int *a, int t, int bbs_style);
 /* makes a truly random prime of a given size (bits),
  *
  * Flags are as follows:
- * 
+ *
  *   LTM_PRIME_BBS      - make prime congruent to 3 mod 4
  *   LTM_PRIME_SAFE     - make sure (p-1)/2 is prime as well (implies LTM_PRIME_BBS)
  *   LTM_PRIME_2MSB_OFF - make the 2nd highest bit zero
