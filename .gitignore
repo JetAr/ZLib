@@ -45,5 +45,6 @@
 *.pch
 *.plg
 *.opt
+*.exp
 Debug
 Release
