@@ -1,0 +1,41 @@
+IProf: Portable Industrial-Strength Interactive Profiling
+
+Version 0.2 - 2003-02-06
+
+A portable industrial-strength interactive profiler for C++ and C.
+
+Directly supports Win32 timers and OpenGL for display (although you need text-printing apparatus of your own for the profiler display to use). Porting should be easy; see the readme for details.
+
+Placed in the public domain on April 16, 2004. Ignore any copyright messages you may find in the current package (I'll remove them with the next version).
+
+Readme (25K)
+
+Package (23K)
+
+version 0.0 screenshot
+
+Version history:
+
+version 0.2 -- 2003-02-06 STB
+   - Significant interface changes to Prof_draw_gl:
+      - accepts floating point instead of int for 2d screen metrics
+      - accepts a total width and height of the display and conforms
+        to that
+      - accepts a precision specification for display of time values
+   - added little '+' and '-' signs reminiscent of list displays
+     so you know which ones can be drilled down on
+   - expanded this doc's description of what's legal for a zone-name
+   - fixed an error trying to compile the C files as C++
+   - added Prof_select_parent() for moving up the tree
+
+version 0.1 -- 2003-02-05 STB
+   - First public version, heavily refactored, 1500 lines
+   - win32 timing interface and smooth "moving average" code derived
+        from Jonathan Blow's Game Developer Magazine articles
+   - missing functionality:
+      - correct attribution of time to zones that are parents of
+        recursive zones in call graph view (hierarchical times don't
+        bubble up correctly)
+      - spread recursion display (displaying each depth of a recursive
+        zone as if it were a separate zone)
+email sean at silverspaceship dot com
