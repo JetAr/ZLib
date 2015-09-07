@@ -216,3 +216,446 @@ Changes to be committed:
 	new file:   libjpeg/wrrle.c
 	new file:   libjpeg/wrtarga.c
 
++---------+---------+---------+---------+---------+---------+---------+---------+ 
+libjpeg_6b.2015/09/07.13_26_36.14.K.MzM.T@WS 
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	modified:   History.txt
+	new file:   libjpeg/libjpeg_6b/README.TXT
+	new file:   libjpeg/libjpeg_6b/jcapimin.c
+	new file:   libjpeg/libjpeg_6b/jcapistd.c
+	new file:   libjpeg/libjpeg_6b/jccoefct.c
+	new file:   libjpeg/libjpeg_6b/jccolor.c
+	new file:   libjpeg/libjpeg_6b/jcdctmgr.c
+	new file:   libjpeg/libjpeg_6b/jchuff.c
+	new file:   libjpeg/libjpeg_6b/jchuff.h
+	new file:   libjpeg/libjpeg_6b/jcinit.c
+	new file:   libjpeg/libjpeg_6b/jcmainct.c
+	new file:   libjpeg/libjpeg_6b/jcmarker.c
+	new file:   libjpeg/libjpeg_6b/jcmaster.c
+	new file:   libjpeg/libjpeg_6b/jcomapi.c
+	new file:   libjpeg/libjpeg_6b/jconfig.h
+	new file:   libjpeg/libjpeg_6b/jcparam.c
+	new file:   libjpeg/libjpeg_6b/jcphuff.c
+	new file:   libjpeg/libjpeg_6b/jcprepct.c
+	new file:   libjpeg/libjpeg_6b/jcsample.c
+	new file:   libjpeg/libjpeg_6b/jctrans.c
+	new file:   libjpeg/libjpeg_6b/jdapimin.c
+	new file:   libjpeg/libjpeg_6b/jdapistd.c
+	new file:   libjpeg/libjpeg_6b/jdatadst.c
+	new file:   libjpeg/libjpeg_6b/jdatasrc.c
+	new file:   libjpeg/libjpeg_6b/jdcoefct.c
+	new file:   libjpeg/libjpeg_6b/jdcolor.c
+	new file:   libjpeg/libjpeg_6b/jdct.h
+	new file:   libjpeg/libjpeg_6b/jddctmgr.c
+	new file:   libjpeg/libjpeg_6b/jdhuff.c
+	new file:   libjpeg/libjpeg_6b/jdhuff.h
+	new file:   libjpeg/libjpeg_6b/jdinput.c
+	new file:   libjpeg/libjpeg_6b/jdmainct.c
+	new file:   libjpeg/libjpeg_6b/jdmarker.c
+	new file:   libjpeg/libjpeg_6b/jdmaster.c
+	new file:   libjpeg/libjpeg_6b/jdmerge.c
+	new file:   libjpeg/libjpeg_6b/jdphuff.c
+	new file:   libjpeg/libjpeg_6b/jdpostct.c
+	new file:   libjpeg/libjpeg_6b/jdsample.c
+	new file:   libjpeg/libjpeg_6b/jdtrans.c
+	new file:   libjpeg/libjpeg_6b/jerror.c
+	new file:   libjpeg/libjpeg_6b/jerror.h
+	new file:   libjpeg/libjpeg_6b/jfdctflt.c
+	new file:   libjpeg/libjpeg_6b/jfdctfst.c
+	new file:   libjpeg/libjpeg_6b/jfdctint.c
+	new file:   libjpeg/libjpeg_6b/jidctflt.c
+	new file:   libjpeg/libjpeg_6b/jidctfst.c
+	new file:   libjpeg/libjpeg_6b/jidctint.c
+	new file:   libjpeg/libjpeg_6b/jidctred.c
+	new file:   libjpeg/libjpeg_6b/jinclude.h
+	new file:   libjpeg/libjpeg_6b/jmemmgr.c
+	new file:   libjpeg/libjpeg_6b/jmemnobs.c
+	new file:   libjpeg/libjpeg_6b/jmemsys.h
+	new file:   libjpeg/libjpeg_6b/jmorecfg.h
+	new file:   libjpeg/libjpeg_6b/jpegint.h
+	new file:   libjpeg/libjpeg_6b/jpeglib.h
+	new file:   libjpeg/libjpeg_6b/jquant1.c
+	new file:   libjpeg/libjpeg_6b/jquant2.c
+	new file:   libjpeg/libjpeg_6b/jutils.c
+	new file:   libjpeg/libjpeg_6b/jversion.h
+	new file:   libjpeg/libjpeg_8d/.travis.yml
+	new file:   libjpeg/libjpeg_8d/CMakeLists.txt
+	new file:   libjpeg/libjpeg_8d/Makefile.am
+	new file:   libjpeg/libjpeg_8d/Makefile.in
+	new file:   libjpeg/libjpeg_8d/README
+	new file:   libjpeg/libjpeg_8d/aclocal.m4
+	new file:   libjpeg/libjpeg_8d/ansi2knr.1
+	new file:   libjpeg/libjpeg_8d/ansi2knr.c
+	new file:   libjpeg/libjpeg_8d/cderror.h
+	new file:   libjpeg/libjpeg_8d/cdjpeg.c
+	new file:   libjpeg/libjpeg_8d/cdjpeg.h
+	new file:   libjpeg/libjpeg_8d/change.log
+	new file:   libjpeg/libjpeg_8d/cjpeg.1
+	new file:   libjpeg/libjpeg_8d/cjpeg.c
+	new file:   libjpeg/libjpeg_8d/ckconfig.c
+	new file:   libjpeg/libjpeg_8d/cmake/dist.cmake
+	new file:   libjpeg/libjpeg_8d/coderules.txt
+	new file:   libjpeg/libjpeg_8d/config.guess
+	new file:   libjpeg/libjpeg_8d/config.sub
+	new file:   libjpeg/libjpeg_8d/configure
+	new file:   libjpeg/libjpeg_8d/configure.ac
+	new file:   libjpeg/libjpeg_8d/depcomp
+	new file:   libjpeg/libjpeg_8d/dist.info
+	new file:   libjpeg/libjpeg_8d/djpeg.1
+	new file:   libjpeg/libjpeg_8d/djpeg.c
+	new file:   libjpeg/libjpeg_8d/example.c
+	new file:   libjpeg/libjpeg_8d/filelist.txt
+	new file:   libjpeg/libjpeg_8d/install-sh
+	new file:   libjpeg/libjpeg_8d/install.txt
+	new file:   libjpeg/libjpeg_8d/jaricom.c
+	new file:   libjpeg/libjpeg_8d/jcapimin.c
+	new file:   libjpeg/libjpeg_8d/jcapistd.c
+	new file:   libjpeg/libjpeg_8d/jcarith.c
+	new file:   libjpeg/libjpeg_8d/jccoefct.c
+	new file:   libjpeg/libjpeg_8d/jccolor.c
+	new file:   libjpeg/libjpeg_8d/jcdctmgr.c
+	new file:   libjpeg/libjpeg_8d/jchuff.c
+	new file:   libjpeg/libjpeg_8d/jcinit.c
+	new file:   libjpeg/libjpeg_8d/jcmainct.c
+	new file:   libjpeg/libjpeg_8d/jcmarker.c
+	new file:   libjpeg/libjpeg_8d/jcmaster.c
+	new file:   libjpeg/libjpeg_8d/jcomapi.c
+	new file:   libjpeg/libjpeg_8d/jconfig.bcc
+	new file:   libjpeg/libjpeg_8d/jconfig.cfg
+	new file:   libjpeg/libjpeg_8d/jconfig.dj
+	new file:   libjpeg/libjpeg_8d/jconfig.h.cmake
+	new file:   libjpeg/libjpeg_8d/jconfig.mac
+	new file:   libjpeg/libjpeg_8d/jconfig.manx
+	new file:   libjpeg/libjpeg_8d/jconfig.mc6
+	new file:   libjpeg/libjpeg_8d/jconfig.sas
+	new file:   libjpeg/libjpeg_8d/jconfig.st
+	new file:   libjpeg/libjpeg_8d/jconfig.txt
+	new file:   libjpeg/libjpeg_8d/jconfig.vc
+	new file:   libjpeg/libjpeg_8d/jconfig.vms
+	new file:   libjpeg/libjpeg_8d/jconfig.wat
+	new file:   libjpeg/libjpeg_8d/jcparam.c
+	new file:   libjpeg/libjpeg_8d/jcprepct.c
+	new file:   libjpeg/libjpeg_8d/jcsample.c
+	new file:   libjpeg/libjpeg_8d/jctrans.c
+	new file:   libjpeg/libjpeg_8d/jdapimin.c
+	new file:   libjpeg/libjpeg_8d/jdapistd.c
+	new file:   libjpeg/libjpeg_8d/jdarith.c
+	new file:   libjpeg/libjpeg_8d/jdatadst.c
+	new file:   libjpeg/libjpeg_8d/jdatasrc.c
+	new file:   libjpeg/libjpeg_8d/jdcoefct.c
+	new file:   libjpeg/libjpeg_8d/jdcolor.c
+	new file:   libjpeg/libjpeg_8d/jdct.h
+	new file:   libjpeg/libjpeg_8d/jddctmgr.c
+	new file:   libjpeg/libjpeg_8d/jdhuff.c
+	new file:   libjpeg/libjpeg_8d/jdinput.c
+	new file:   libjpeg/libjpeg_8d/jdmainct.c
+	new file:   libjpeg/libjpeg_8d/jdmarker.c
+	new file:   libjpeg/libjpeg_8d/jdmaster.c
+	new file:   libjpeg/libjpeg_8d/jdmerge.c
+	new file:   libjpeg/libjpeg_8d/jdpostct.c
+	new file:   libjpeg/libjpeg_8d/jdsample.c
+	new file:   libjpeg/libjpeg_8d/jdtrans.c
+	new file:   libjpeg/libjpeg_8d/jerror.c
+	new file:   libjpeg/libjpeg_8d/jerror.h
+	new file:   libjpeg/libjpeg_8d/jfdctflt.c
+	new file:   libjpeg/libjpeg_8d/jfdctfst.c
+	new file:   libjpeg/libjpeg_8d/jfdctint.c
+	new file:   libjpeg/libjpeg_8d/jidctflt.c
+	new file:   libjpeg/libjpeg_8d/jidctfst.c
+	new file:   libjpeg/libjpeg_8d/jidctint.c
+	new file:   libjpeg/libjpeg_8d/jinclude.h
+	new file:   libjpeg/libjpeg_8d/jmemansi.c
+	new file:   libjpeg/libjpeg_8d/jmemdos.c
+	new file:   libjpeg/libjpeg_8d/jmemdosa.asm
+	new file:   libjpeg/libjpeg_8d/jmemmac.c
+	new file:   libjpeg/libjpeg_8d/jmemmgr.c
+	new file:   libjpeg/libjpeg_8d/jmemname.c
+	new file:   libjpeg/libjpeg_8d/jmemnobs.c
+	new file:   libjpeg/libjpeg_8d/jmemsys.h
+	new file:   libjpeg/libjpeg_8d/jmorecfg.h
+	new file:   libjpeg/libjpeg_8d/jpeg_test.cmake
+	new file:   libjpeg/libjpeg_8d/jpegint.h
+	new file:   libjpeg/libjpeg_8d/jpeglib.h
+	new file:   libjpeg/libjpeg_8d/jpegtran.1
+	new file:   libjpeg/libjpeg_8d/jpegtran.c
+	new file:   libjpeg/libjpeg_8d/jquant1.c
+	new file:   libjpeg/libjpeg_8d/jquant2.c
+	new file:   libjpeg/libjpeg_8d/jutils.c
+	new file:   libjpeg/libjpeg_8d/jversion.h
+	new file:   libjpeg/libjpeg_8d/libjpeg.map
+	new file:   libjpeg/libjpeg_8d/libjpeg.txt
+	new file:   libjpeg/libjpeg_8d/ltmain.sh
+	new file:   libjpeg/libjpeg_8d/makcjpeg.st
+	new file:   libjpeg/libjpeg_8d/makdjpeg.st
+	new file:   libjpeg/libjpeg_8d/makeadsw.vc6
+	new file:   libjpeg/libjpeg_8d/makeasln.v10
+	new file:   libjpeg/libjpeg_8d/makecdep.vc6
+	new file:   libjpeg/libjpeg_8d/makecdsp.vc6
+	new file:   libjpeg/libjpeg_8d/makecfil.v10
+	new file:   libjpeg/libjpeg_8d/makecmak.vc6
+	new file:   libjpeg/libjpeg_8d/makecvcx.v10
+	new file:   libjpeg/libjpeg_8d/makeddep.vc6
+	new file:   libjpeg/libjpeg_8d/makeddsp.vc6
+	new file:   libjpeg/libjpeg_8d/makedfil.v10
+	new file:   libjpeg/libjpeg_8d/makedmak.vc6
+	new file:   libjpeg/libjpeg_8d/makedvcx.v10
+	new file:   libjpeg/libjpeg_8d/makefile.ansi
+	new file:   libjpeg/libjpeg_8d/makefile.bcc
+	new file:   libjpeg/libjpeg_8d/makefile.dj
+	new file:   libjpeg/libjpeg_8d/makefile.manx
+	new file:   libjpeg/libjpeg_8d/makefile.mc6
+	new file:   libjpeg/libjpeg_8d/makefile.mms
+	new file:   libjpeg/libjpeg_8d/makefile.sas
+	new file:   libjpeg/libjpeg_8d/makefile.unix
+	new file:   libjpeg/libjpeg_8d/makefile.vc
+	new file:   libjpeg/libjpeg_8d/makefile.vms
+	new file:   libjpeg/libjpeg_8d/makefile.wat
+	new file:   libjpeg/libjpeg_8d/makejdep.vc6
+	new file:   libjpeg/libjpeg_8d/makejdsp.vc6
+	new file:   libjpeg/libjpeg_8d/makejdsw.vc6
+	new file:   libjpeg/libjpeg_8d/makejfil.v10
+	new file:   libjpeg/libjpeg_8d/makejmak.vc6
+	new file:   libjpeg/libjpeg_8d/makejsln.v10
+	new file:   libjpeg/libjpeg_8d/makejvcx.v10
+	new file:   libjpeg/libjpeg_8d/makeproj.mac
+	new file:   libjpeg/libjpeg_8d/makerdep.vc6
+	new file:   libjpeg/libjpeg_8d/makerdsp.vc6
+	new file:   libjpeg/libjpeg_8d/makerfil.v10
+	new file:   libjpeg/libjpeg_8d/makermak.vc6
+	new file:   libjpeg/libjpeg_8d/makervcx.v10
+	new file:   libjpeg/libjpeg_8d/maketdep.vc6
+	new file:   libjpeg/libjpeg_8d/maketdsp.vc6
+	new file:   libjpeg/libjpeg_8d/maketfil.v10
+	new file:   libjpeg/libjpeg_8d/maketmak.vc6
+	new file:   libjpeg/libjpeg_8d/maketvcx.v10
+	new file:   libjpeg/libjpeg_8d/makewdep.vc6
+	new file:   libjpeg/libjpeg_8d/makewdsp.vc6
+	new file:   libjpeg/libjpeg_8d/makewfil.v10
+	new file:   libjpeg/libjpeg_8d/makewmak.vc6
+	new file:   libjpeg/libjpeg_8d/makewvcx.v10
+	new file:   libjpeg/libjpeg_8d/makljpeg.st
+	new file:   libjpeg/libjpeg_8d/maktjpeg.st
+	new file:   libjpeg/libjpeg_8d/missing
+	new file:   libjpeg/libjpeg_8d/rdbmp.c
+	new file:   libjpeg/libjpeg_8d/rdcolmap.c
+	new file:   libjpeg/libjpeg_8d/rdgif.c
+	new file:   libjpeg/libjpeg_8d/rdjpgcom.1
+	new file:   libjpeg/libjpeg_8d/rdjpgcom.c
+	new file:   libjpeg/libjpeg_8d/rdppm.c
+	new file:   libjpeg/libjpeg_8d/rdrle.c
+	new file:   libjpeg/libjpeg_8d/rdswitch.c
+	new file:   libjpeg/libjpeg_8d/rdtarga.c
+	new file:   libjpeg/libjpeg_8d/structure.txt
+	new file:   libjpeg/libjpeg_8d/testimg.bmp
+	new file:   libjpeg/libjpeg_8d/testimg.jpg
+	new file:   libjpeg/libjpeg_8d/testimg.ppm
+	new file:   libjpeg/libjpeg_8d/testimgp.jpg
+	new file:   libjpeg/libjpeg_8d/testorig.jpg
+	new file:   libjpeg/libjpeg_8d/testprog.jpg
+	new file:   libjpeg/libjpeg_8d/transupp.c
+	new file:   libjpeg/libjpeg_8d/transupp.h
+	new file:   libjpeg/libjpeg_8d/usage.txt
+	new file:   libjpeg/libjpeg_8d/wizard.txt
+	new file:   libjpeg/libjpeg_8d/wrbmp.c
+	new file:   libjpeg/libjpeg_8d/wrgif.c
+	new file:   libjpeg/libjpeg_8d/wrjpgcom.1
+	new file:   libjpeg/libjpeg_8d/wrjpgcom.c
+	new file:   libjpeg/libjpeg_8d/wrppm.c
+	new file:   libjpeg/libjpeg_8d/wrrle.c
+	new file:   libjpeg/libjpeg_8d/wrtarga.c
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	deleted:    libjpeg/.travis.yml
+	deleted:    libjpeg/CMakeLists.txt
+	deleted:    libjpeg/Makefile.am
+	deleted:    libjpeg/Makefile.in
+	deleted:    libjpeg/README
+	deleted:    libjpeg/aclocal.m4
+	deleted:    libjpeg/ansi2knr.1
+	deleted:    libjpeg/ansi2knr.c
+	deleted:    libjpeg/cderror.h
+	deleted:    libjpeg/cdjpeg.c
+	deleted:    libjpeg/cdjpeg.h
+	deleted:    libjpeg/change.log
+	deleted:    libjpeg/cjpeg.1
+	deleted:    libjpeg/cjpeg.c
+	deleted:    libjpeg/ckconfig.c
+	deleted:    libjpeg/cmake/dist.cmake
+	deleted:    libjpeg/coderules.txt
+	deleted:    libjpeg/config.guess
+	deleted:    libjpeg/config.sub
+	deleted:    libjpeg/configure
+	deleted:    libjpeg/configure.ac
+	deleted:    libjpeg/depcomp
+	deleted:    libjpeg/dist.info
+	deleted:    libjpeg/djpeg.1
+	deleted:    libjpeg/djpeg.c
+	deleted:    libjpeg/example.c
+	deleted:    libjpeg/filelist.txt
+	deleted:    libjpeg/install-sh
+	deleted:    libjpeg/install.txt
+	deleted:    libjpeg/jaricom.c
+	deleted:    libjpeg/jcapimin.c
+	deleted:    libjpeg/jcapistd.c
+	deleted:    libjpeg/jcarith.c
+	deleted:    libjpeg/jccoefct.c
+	deleted:    libjpeg/jccolor.c
+	deleted:    libjpeg/jcdctmgr.c
+	deleted:    libjpeg/jchuff.c
+	deleted:    libjpeg/jcinit.c
+	deleted:    libjpeg/jcmainct.c
+	deleted:    libjpeg/jcmarker.c
+	deleted:    libjpeg/jcmaster.c
+	deleted:    libjpeg/jcomapi.c
+	deleted:    libjpeg/jconfig.bcc
+	deleted:    libjpeg/jconfig.cfg
+	deleted:    libjpeg/jconfig.dj
+	deleted:    libjpeg/jconfig.h.cmake
+	deleted:    libjpeg/jconfig.mac
+	deleted:    libjpeg/jconfig.manx
+	deleted:    libjpeg/jconfig.mc6
+	deleted:    libjpeg/jconfig.sas
+	deleted:    libjpeg/jconfig.st
+	deleted:    libjpeg/jconfig.txt
+	deleted:    libjpeg/jconfig.vc
+	deleted:    libjpeg/jconfig.vms
+	deleted:    libjpeg/jconfig.wat
+	deleted:    libjpeg/jcparam.c
+	deleted:    libjpeg/jcprepct.c
+	deleted:    libjpeg/jcsample.c
+	deleted:    libjpeg/jctrans.c
+	deleted:    libjpeg/jdapimin.c
+	deleted:    libjpeg/jdapistd.c
+	deleted:    libjpeg/jdarith.c
+	deleted:    libjpeg/jdatadst.c
+	deleted:    libjpeg/jdatasrc.c
+	deleted:    libjpeg/jdcoefct.c
+	deleted:    libjpeg/jdcolor.c
+	deleted:    libjpeg/jdct.h
+	deleted:    libjpeg/jddctmgr.c
+	deleted:    libjpeg/jdhuff.c
+	deleted:    libjpeg/jdinput.c
+	deleted:    libjpeg/jdmainct.c
+	deleted:    libjpeg/jdmarker.c
+	deleted:    libjpeg/jdmaster.c
+	deleted:    libjpeg/jdmerge.c
+	deleted:    libjpeg/jdpostct.c
+	deleted:    libjpeg/jdsample.c
+	deleted:    libjpeg/jdtrans.c
+	deleted:    libjpeg/jerror.c
+	deleted:    libjpeg/jerror.h
+	deleted:    libjpeg/jfdctflt.c
+	deleted:    libjpeg/jfdctfst.c
+	deleted:    libjpeg/jfdctint.c
+	deleted:    libjpeg/jidctflt.c
+	deleted:    libjpeg/jidctfst.c
+	deleted:    libjpeg/jidctint.c
+	deleted:    libjpeg/jinclude.h
+	deleted:    libjpeg/jmemansi.c
+	deleted:    libjpeg/jmemdos.c
+	deleted:    libjpeg/jmemdosa.asm
+	deleted:    libjpeg/jmemmac.c
+	deleted:    libjpeg/jmemmgr.c
+	deleted:    libjpeg/jmemname.c
+	deleted:    libjpeg/jmemnobs.c
+	deleted:    libjpeg/jmemsys.h
+	deleted:    libjpeg/jmorecfg.h
+	deleted:    libjpeg/jpeg_test.cmake
+	deleted:    libjpeg/jpegint.h
+	deleted:    libjpeg/jpeglib.h
+	deleted:    libjpeg/jpegtran.1
+	deleted:    libjpeg/jpegtran.c
+	deleted:    libjpeg/jquant1.c
+	deleted:    libjpeg/jquant2.c
+	deleted:    libjpeg/jutils.c
+	deleted:    libjpeg/jversion.h
+	deleted:    libjpeg/libjpeg.map
+	deleted:    libjpeg/libjpeg.txt
+	deleted:    libjpeg/ltmain.sh
+	deleted:    libjpeg/makcjpeg.st
+	deleted:    libjpeg/makdjpeg.st
+	deleted:    libjpeg/makeadsw.vc6
+	deleted:    libjpeg/makeasln.v10
+	deleted:    libjpeg/makecdep.vc6
+	deleted:    libjpeg/makecdsp.vc6
+	deleted:    libjpeg/makecfil.v10
+	deleted:    libjpeg/makecmak.vc6
+	deleted:    libjpeg/makecvcx.v10
+	deleted:    libjpeg/makeddep.vc6
+	deleted:    libjpeg/makeddsp.vc6
+	deleted:    libjpeg/makedfil.v10
+	deleted:    libjpeg/makedmak.vc6
+	deleted:    libjpeg/makedvcx.v10
+	deleted:    libjpeg/makefile.ansi
+	deleted:    libjpeg/makefile.bcc
+	deleted:    libjpeg/makefile.dj
+	deleted:    libjpeg/makefile.manx
+	deleted:    libjpeg/makefile.mc6
+	deleted:    libjpeg/makefile.mms
+	deleted:    libjpeg/makefile.sas
+	deleted:    libjpeg/makefile.unix
+	deleted:    libjpeg/makefile.vc
+	deleted:    libjpeg/makefile.vms
+	deleted:    libjpeg/makefile.wat
+	deleted:    libjpeg/makejdep.vc6
+	deleted:    libjpeg/makejdsp.vc6
+	deleted:    libjpeg/makejdsw.vc6
+	deleted:    libjpeg/makejfil.v10
+	deleted:    libjpeg/makejmak.vc6
+	deleted:    libjpeg/makejsln.v10
+	deleted:    libjpeg/makejvcx.v10
+	deleted:    libjpeg/makeproj.mac
+	deleted:    libjpeg/makerdep.vc6
+	deleted:    libjpeg/makerdsp.vc6
+	deleted:    libjpeg/makerfil.v10
+	deleted:    libjpeg/makermak.vc6
+	deleted:    libjpeg/makervcx.v10
+	deleted:    libjpeg/maketdep.vc6
+	deleted:    libjpeg/maketdsp.vc6
+	deleted:    libjpeg/maketfil.v10
+	deleted:    libjpeg/maketmak.vc6
+	deleted:    libjpeg/maketvcx.v10
+	deleted:    libjpeg/makewdep.vc6
+	deleted:    libjpeg/makewdsp.vc6
+	deleted:    libjpeg/makewfil.v10
+	deleted:    libjpeg/makewmak.vc6
+	deleted:    libjpeg/makewvcx.v10
+	deleted:    libjpeg/makljpeg.st
+	deleted:    libjpeg/maktjpeg.st
+	deleted:    libjpeg/missing
+	deleted:    libjpeg/rdbmp.c
+	deleted:    libjpeg/rdcolmap.c
+	deleted:    libjpeg/rdgif.c
+	deleted:    libjpeg/rdjpgcom.1
+	deleted:    libjpeg/rdjpgcom.c
+	deleted:    libjpeg/rdppm.c
+	deleted:    libjpeg/rdrle.c
+	deleted:    libjpeg/rdswitch.c
+	deleted:    libjpeg/rdtarga.c
+	deleted:    libjpeg/structure.txt
+	deleted:    libjpeg/testimg.bmp
+	deleted:    libjpeg/testimg.jpg
+	deleted:    libjpeg/testimg.ppm
+	deleted:    libjpeg/testimgp.jpg
+	deleted:    libjpeg/testorig.jpg
+	deleted:    libjpeg/testprog.jpg
+	deleted:    libjpeg/transupp.c
+	deleted:    libjpeg/transupp.h
+	deleted:    libjpeg/usage.txt
+	deleted:    libjpeg/wizard.txt
+	deleted:    libjpeg/wrbmp.c
+	deleted:    libjpeg/wrgif.c
+	deleted:    libjpeg/wrjpgcom.1
+	deleted:    libjpeg/wrjpgcom.c
+	deleted:    libjpeg/wrppm.c
+	deleted:    libjpeg/wrrle.c
+	deleted:    libjpeg/wrtarga.c
+
