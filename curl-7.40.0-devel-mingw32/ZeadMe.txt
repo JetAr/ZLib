@@ -1,0 +1,2 @@
+Win32 - Generic
+Win32 2000/XP zip
