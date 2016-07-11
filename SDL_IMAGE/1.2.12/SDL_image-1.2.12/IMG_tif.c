@@ -1,23 +1,22 @@
 /*
-    SDL_image:  An example image loading library for use with SDL
-    Copyright (C) 1997-2009 Sam Lantinga
+  SDL_image:  An example image loading library for use with SDL
+  Copyright (C) 1997-2012 Sam Lantinga <slouken@libsdl.org>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Lesser General Public
-    License as published by the Free Software Foundation; either
-    version 2.1 of the License, or (at your option) any later version.
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Lesser General Public License for more details.
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
 
-    You should have received a copy of the GNU Lesser General Public
-    License along with this library; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-    Sam Lantinga
-    slouken@libsdl.org
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
 */
 
 #if !defined(__APPLE__) || defined(SDL_IMAGE_USE_COMMON_BACKEND)
@@ -40,88 +39,88 @@ static struct {
 	int (*TIFFGetField)(TIFF*, ttag_t, ...);
 	int (*TIFFReadRGBAImage)(TIFF*, uint32, uint32, uint32*, int);
 	TIFFErrorHandler (*TIFFSetErrorHandler)(TIFFErrorHandler);
-} libtiff;
+} lib;
 
 #ifdef LOAD_TIF_DYNAMIC
 int IMG_InitTIF()
 {
-	if ( libtiff.loaded == 0 ) {
-		libtiff.handle = SDL_LoadObject(LOAD_TIF_DYNAMIC);
-		if ( libtiff.handle == NULL ) {
+	if ( lib.loaded == 0 ) {
+		lib.handle = SDL_LoadObject(LOAD_TIF_DYNAMIC);
+		if ( lib.handle == NULL ) {
 			return -1;
 		}
-		libtiff.TIFFClientOpen =
+		lib.TIFFClientOpen =
 			(TIFF* (*)(const char*, const char*, thandle_t, TIFFReadWriteProc, TIFFReadWriteProc, TIFFSeekProc, TIFFCloseProc, TIFFSizeProc, TIFFMapFileProc, TIFFUnmapFileProc))
-			SDL_LoadFunction(libtiff.handle, "TIFFClientOpen");
-		if ( libtiff.TIFFClientOpen == NULL ) {
-			SDL_UnloadObject(libtiff.handle);
+			SDL_LoadFunction(lib.handle, "TIFFClientOpen");
+		if ( lib.TIFFClientOpen == NULL ) {
+			SDL_UnloadObject(lib.handle);
 			return -1;
 		}
-		libtiff.TIFFClose =
+		lib.TIFFClose =
 			(void (*)(TIFF*))
-			SDL_LoadFunction(libtiff.handle, "TIFFClose");
-		if ( libtiff.TIFFClose == NULL ) {
-			SDL_UnloadObject(libtiff.handle);
+			SDL_LoadFunction(lib.handle, "TIFFClose");
+		if ( lib.TIFFClose == NULL ) {
+			SDL_UnloadObject(lib.handle);
 			return -1;
 		}
-		libtiff.TIFFGetField =
+		lib.TIFFGetField =
 			(int (*)(TIFF*, ttag_t, ...))
-			SDL_LoadFunction(libtiff.handle, "TIFFGetField");
-		if ( libtiff.TIFFGetField == NULL ) {
-			SDL_UnloadObject(libtiff.handle);
+			SDL_LoadFunction(lib.handle, "TIFFGetField");
+		if ( lib.TIFFGetField == NULL ) {
+			SDL_UnloadObject(lib.handle);
 			return -1;
 		}
-		libtiff.TIFFReadRGBAImage =
+		lib.TIFFReadRGBAImage =
 			(int (*)(TIFF*, uint32, uint32, uint32*, int))
-			SDL_LoadFunction(libtiff.handle, "TIFFReadRGBAImage");
-		if ( libtiff.TIFFReadRGBAImage == NULL ) {
-			SDL_UnloadObject(libtiff.handle);
+			SDL_LoadFunction(lib.handle, "TIFFReadRGBAImage");
+		if ( lib.TIFFReadRGBAImage == NULL ) {
+			SDL_UnloadObject(lib.handle);
 			return -1;
 		}
-		libtiff.TIFFSetErrorHandler =
+		lib.TIFFSetErrorHandler =
 			(TIFFErrorHandler (*)(TIFFErrorHandler))
-			SDL_LoadFunction(libtiff.handle, "TIFFSetErrorHandler");
-		if ( libtiff.TIFFSetErrorHandler == NULL ) {
-			SDL_UnloadObject(libtiff.handle);
+			SDL_LoadFunction(lib.handle, "TIFFSetErrorHandler");
+		if ( lib.TIFFSetErrorHandler == NULL ) {
+			SDL_UnloadObject(lib.handle);
 			return -1;
 		}
 	}
-	++libtiff.loaded;
+	++lib.loaded;
 
 	return 0;
 }
 void IMG_QuitTIF()
 {
-	if ( libtiff.loaded == 0 ) {
+	if ( lib.loaded == 0 ) {
 		return;
 	}
-	if ( libtiff.loaded == 1 ) {
-		SDL_UnloadObject(libtiff.handle);
+	if ( lib.loaded == 1 ) {
+		SDL_UnloadObject(lib.handle);
 	}
-	--libtiff.loaded;
+	--lib.loaded;
 }
 #else
 int IMG_InitTIF()
 {
-	if ( libtiff.loaded == 0 ) {
-		libtiff.TIFFClientOpen = TIFFClientOpen;
-		libtiff.TIFFClose = TIFFClose;
-		libtiff.TIFFGetField = TIFFGetField;
-		libtiff.TIFFReadRGBAImage = TIFFReadRGBAImage;
-		libtiff.TIFFSetErrorHandler = TIFFSetErrorHandler;
+	if ( lib.loaded == 0 ) {
+		lib.TIFFClientOpen = TIFFClientOpen;
+		lib.TIFFClose = TIFFClose;
+		lib.TIFFGetField = TIFFGetField;
+		lib.TIFFReadRGBAImage = TIFFReadRGBAImage;
+		lib.TIFFSetErrorHandler = TIFFSetErrorHandler;
 	}
-	++libtiff.loaded;
+	++lib.loaded;
 
 	return 0;
 }
 void IMG_QuitTIF()
 {
-	if ( libtiff.loaded == 0 ) {
+	if ( lib.loaded == 0 ) {
 		return;
 	}
-	if ( libtiff.loaded == 1 ) {
+	if ( lib.loaded == 1 ) {
 	}
-	--libtiff.loaded;
+	--lib.loaded;
 }
 #endif /* LOAD_TIF_DYNAMIC */
 
@@ -223,14 +222,14 @@ SDL_Surface* IMG_LoadTIF_RW(SDL_RWops* src)
 	}
 
 	/* turn off memory mapped access with the m flag */
-	tiff = libtiff.TIFFClientOpen("SDL_image", "rm", (thandle_t)src, 
+	tiff = lib.TIFFClientOpen("SDL_image", "rm", (thandle_t)src, 
 		tiff_read, tiff_write, tiff_seek, tiff_close, tiff_size, tiff_map, tiff_unmap);
 	if(!tiff)
 		goto error;
 
 	/* Retrieve the dimensions of the image from the TIFF tags */
-	libtiff.TIFFGetField(tiff, TIFFTAG_IMAGEWIDTH, &img_width);
-	libtiff.TIFFGetField(tiff, TIFFTAG_IMAGELENGTH, &img_height);
+	lib.TIFFGetField(tiff, TIFFTAG_IMAGEWIDTH, &img_width);
+	lib.TIFFGetField(tiff, TIFFTAG_IMAGELENGTH, &img_height);
 
 	Rmask = 0x000000FF;
 	Gmask = 0x0000FF00;
@@ -241,7 +240,7 @@ SDL_Surface* IMG_LoadTIF_RW(SDL_RWops* src)
 	if(!surface)
 		goto error;
 	
-	if(!libtiff.TIFFReadRGBAImage(tiff, img_width, img_height, surface->pixels, 0))
+	if(!lib.TIFFReadRGBAImage(tiff, img_width, img_height, surface->pixels, 0))
 		goto error;
 
 	/* libtiff loads the image upside-down, flip it back */
@@ -258,7 +257,7 @@ SDL_Surface* IMG_LoadTIF_RW(SDL_RWops* src)
 			bot[x] = tmp;
 		}
 	}
-	libtiff.TIFFClose(tiff);
+	lib.TIFFClose(tiff);
 	
 	return surface;
 
