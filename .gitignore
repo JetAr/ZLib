@@ -21,7 +21,7 @@
 *.dylib
 
 # Executables
-*.exe
+#*.exe
 *.out
 *.app
 *.i*86
@@ -33,9 +33,11 @@
 *.ncb
 *.ilk
 *.obj
+*.iobj
 *.pdb
+*.ipdb
 *.suo
-*.exe
+#*.exe
 *.htm
 *.idb
 *.manifest
